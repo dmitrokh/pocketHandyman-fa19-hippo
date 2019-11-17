@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1098423857386",
+    "firebase_url": "https://pockethandyman-786ef.firebaseio.com",
+    "project_id": "pockethandyman-786ef",
+    "storage_bucket": "pockethandyman-786ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098423857386:android:81d49a2286ef7007506793",
+        "android_client_info": {
+          "package_name": "com.example.pockethandyman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098423857386-oq4f6fbkf3okoss6heu63v7lbnelsob9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeSpz6ujLwwwwJtNGdWvpYM448kwmGhRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098423857386-oq4f6fbkf3okoss6heu63v7lbnelsob9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
