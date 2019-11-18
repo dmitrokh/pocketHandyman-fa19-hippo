@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.pockethandyman.EmailPasswordActivity">
+        <activity
             android:name=".EmailPasswordActivity"
             android:label="activity_email_password"
             android:parentActivityName=".LogoActivity">
