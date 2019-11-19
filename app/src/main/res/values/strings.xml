@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">PocketHandyman</string>
     <string name="title_activity_logo">Logo</string>
-<<<<<<< HEAD
     <string name="Home_Appliances">Home Appliances</string>
     <string name="Office_electronics">Office Electronics</string>
     <string name="Automotive">Automotive</string>
     <string name="Home_repairs">Home Repairs</string>
-=======
     <string name="title_activity_ask_question">AskQuestionActivity</string>
     <string name="title_home">Home</string>
     <string name="title_ask_question">Ask Question</string>
     <string name="title_account">Account</string>
->>>>>>> 6736719b93dc79448d8db1a7972853a2d1865ccc
+    <string name="title_activity_Home_Activity">HomeActivity</string>
 </resources>
