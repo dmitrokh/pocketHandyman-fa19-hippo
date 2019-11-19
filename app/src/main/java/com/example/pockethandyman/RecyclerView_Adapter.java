@@ -26,6 +26,7 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
     public int getItemCount() {
         return (null != arrayList ? arrayList.size() : 0);
 
+
     }
 
     @Override
@@ -34,7 +35,7 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
 
 
         final ViewHolder mainHolder = (ViewHolder) holder;
-        //mainHolder.title.setText(arrayList.get(position));
+        mainHolder.title.setText(arrayList.get(position));
 
     }
 

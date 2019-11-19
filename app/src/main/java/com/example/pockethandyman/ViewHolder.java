@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ViewHolder extends RecyclerView.ViewHolder {
 
 
-//    public TextView title = new TextView();
+    public TextView title;
 
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
+
+        this.title = (TextView) itemView.findViewById(R.id.cardTitle);
     }
 
 

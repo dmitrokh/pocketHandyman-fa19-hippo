@@ -33,22 +33,21 @@ public class AnswerFragment extends Fragment {
         return view;
 
     }
-    //Setting recycler view
     private void setRecyclerView() {
 
         recyclerView = (RecyclerView) view
                 .findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView
-                .setLayoutManager(new LinearLayoutManager(getActivity()));//Linear Items
+                .setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            arrayList.add(title+" Items " + i);//Adding items to recycler view
+        for (int i = 0; i < 3; i++) {
+            arrayList.add(title+" Items " + i);
         }
         RecyclerView_Adapter adapter = new RecyclerView_Adapter(getActivity(), arrayList);
-        recyclerView.setAdapter(adapter);// set adapter on recyclerview
+        recyclerView.setAdapter(adapter);
 
     }
 }

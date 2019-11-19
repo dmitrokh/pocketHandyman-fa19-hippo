@@ -32,14 +32,14 @@ public class ButtonActivity extends AppCompatActivity {
         taskName = getIntent().getStringExtra("ActivityName");
 
 
-       // toolbar = (Toolbar) findViewById(R.id.);
-        setSupportActionBar(toolbar);
+//        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        //tabLayout.setupWithViewPager(viewPager);//setting tab over viewpager
+        tabLayout.setupWithViewPager(viewPager);//setting tab over viewpager
 
         //Implementing tab selected listener over tablayout
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -72,7 +72,7 @@ public class ButtonActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new AnswerFragment("ANDROID"), "ANDROID");
         adapter.addFrag(new AnswerFragment("iOS"), "iOS");
-        adapter.addFrag(new AnswerFragment("WINDOWS"), "WINDOWS");
+//        adapter.addFrag(new AnswerFragment("WINDOWS"), "WINDOWS");
         viewPager.setAdapter(adapter);
     }
 
