@@ -12,14 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <activity
             android:name=".LogoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".AskQuestionActivity"
+            android:label="@string/title_activity_ask_question">
         </activity>
 
         <activity
@@ -31,11 +37,20 @@
                 android:value=".LogoActivity" />
         </activity>
 
+
         <activity
-            android:name=".AskQuestionActivity"
-            android:label="@string/title_activity_ask_question">
-                
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_Home_Activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
+
+        <activity android:name=".ButtonActivity"/>
 
     </application>
 

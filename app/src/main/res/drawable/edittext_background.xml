@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item>
+        <shape>
+            <!-- set the shadow color here -->
+            <stroke
+                android:width="2.5dp"
+                android:color="#494949" />
+
+            <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
+
+            <!--Set shadow width as per your requirement -->
+            <padding
+                android:bottom="3dp"
+                 />
+
+            <corners
+                android:bottomRightRadius="15dp"
+                android:bottomLeftRadius="15dp"
+                android:topLeftRadius="15dp"
+                android:topRightRadius="15dp"/>
+
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <solid android:color="#FDFBF8" />
+            <stroke android:width="1dp" android:color="#494949" />
+            <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp" />
+
+
+
+
+            <corners
+                android:bottomRightRadius="15dp"
+                android:bottomLeftRadius="15dp"
+                android:topLeftRadius="15dp"
+                android:topRightRadius="15dp"/>
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFBF8"
+    tools:context=".HomeActivity">
+
+
+    <TextView
+        android:id="@+id/pocket_hand"
+        android:layout_width="336dp"
+        android:layout_height="85dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="45dp"
+        android:gravity="center_horizontal|top"
+        android:text="POCKET       HANDYMAN"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#EFA413"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="365dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/edittext_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pocket_hand"
+        tools:text="    Search a question"
+        tools:textColor="#807E7E">
+
+    </EditText>
+
+    <ImageView
+        android:id="@+id/magnifying_glass"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText"
+        app:srcCompat="@drawable/magnifying_glass" />
+
+    <Button
+        android:id="@+id/Home_appliance_button"
+        android:layout_width="159dp"
+        android:layout_height="159dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/home_appliance_button_background"
+        android:text="@string/Home_Appliances"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFBFB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <Button
+        android:id="@+id/Automotive"
+        android:layout_width="163dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/automotive_background"
+        android:text="@string/Automotive"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFBFB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Home_appliance_button" />
+
+    <Button
+        android:id="@+id/Home_Repairs"
+        android:layout_width="161dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/home_repairs_background"
+        android:text="@string/Home_repairs"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFBFB"
+        android:textColorHighlight="@color/colorPrimaryDark"
+        android:textColorLink="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Office_electronics" />
+
+    <Button
+        android:id="@+id/Office_electronics"
+        android:layout_width="161dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/office_electronics_background"
+        android:text="@string/Office_electronics"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFBFB"
+        android:textColorHighlight="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:scrollbarThumbHorizontal="@color/colorPrimary"
+        android:scrollbarThumbVertical="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:tabIndicatorColor="@color/colorPrimary" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
