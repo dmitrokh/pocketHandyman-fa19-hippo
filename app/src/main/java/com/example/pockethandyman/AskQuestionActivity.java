@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class AskQuestionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String categoryChosen;
@@ -90,17 +92,20 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void setupBottomNavigationView() {
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation_question);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        Intent a = new Intent(getApplicationContext(),HomeActivity.class);
+                        startActivity(a);
 
                         break;
                     case R.id.navigation_question:
 
                         break;
+
                     case R.id.navigation_account:
 
                         break;

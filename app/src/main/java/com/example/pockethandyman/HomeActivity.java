@@ -2,19 +2,26 @@ package com.example.pockethandyman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     Integer buttonSelector = null;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+        setupBottomNavigationView();
 
         Button homeAppliances = (Button) findViewById(R.id.Home_appliance_button);
         homeAppliances.setOnClickListener(new View.OnClickListener() {
@@ -69,5 +76,28 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         startActivity(intent);
+    }
+
+    private void setupBottomNavigationView() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+
+                        break;
+                    case R.id.navigation_question:
+                        Intent a = new Intent(getApplicationContext(),AskQuestionActivity.class);
+                        startActivity(a);
+                        break;
+
+                    case R.id.navigation_account:
+
+                        break;
+                }
+                return true;
+            }
+        });
     }
 }
