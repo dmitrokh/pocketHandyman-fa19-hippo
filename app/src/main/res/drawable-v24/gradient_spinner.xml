@@ -5,13 +5,13 @@
         <item><shape>
             <gradient
                 android:angle="90"
-                android:endColor="#41463C"
-                android:startColor="#FF202020"
+                android:endColor="#FAFAFA"
+                android:startColor="#FFFEFB"
                 android:type="linear" />
 
             <stroke
                 android:width="2dp"
-                android:color="#55AB55" />
+                android:color="#C4C4C4" />
 
             <corners
                 android:radius="5dp" />
@@ -24,7 +24,7 @@
         </shape></item>
         <item ><bitmap
             android:gravity="right"
-            android:src="@drawable/dropdown_arrow_green" />
+            android:src="@drawable/drop_down_arrow_grey_2" />
         </item>
     </layer-list></item>
 

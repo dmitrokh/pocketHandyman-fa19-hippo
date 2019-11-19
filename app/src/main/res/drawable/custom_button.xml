@@ -4,8 +4,8 @@
     <item android:state_pressed="true" >
         <shape android:shape="rectangle"  >
             <corners android:radius="10dp" />
-            <stroke android:width="3dp" android:color="#70C638" />
-            <solid android:color="#E7E7E7"/>
+            <stroke android:width="3dp" android:color="#CFCFCF" />
+            <solid android:color="#FFFEFB"/>
             <!--<gradient
                 android:angle="-90"
                 android:startColor="#E7E7E7"
@@ -17,8 +17,8 @@
             <corners android:radius="10dp" />
             <stroke
                 android:width="2dp"
-                android:color="#55AB60" />
-            <solid android:color="#C0C0C0"/>
+                android:color="#C4C4C4" />
+            <solid android:color="#FFFEFB"/>
             <!--<gradient
                 android:angle="-90"
                 android:startColor="#41463C"
@@ -28,8 +28,8 @@
     <item >
         <shape android:shape="rectangle"  >
             <corners android:radius="10dp" />
-            <stroke android:width="2dp" android:color="#55AB60" />
-            <solid android:color="#E7E7E7"/>
+            <stroke android:width="2dp" android:color="#C4C4C4" />
+            <solid android:color="#FFFEFB"/>
             <!--<gradient
                 android:angle="-90"
                 android:startColor="#41463C"
