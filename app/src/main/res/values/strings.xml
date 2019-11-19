@@ -10,4 +10,11 @@
     <string name="title_ask_question">Ask Question</string>
     <string name="title_account">Account</string>
     <string name="title_activity_Home_Activity">HomeActivity</string>
+    <string-array name="rubrik_array">
+        <item>No selection</item>
+        <item>Home Appliances</item>
+        <item>Office Electronics</item>
+        <item>Automotive</item>
+        <item>Home Repairs</item>
+    </string-array>
 </resources>
