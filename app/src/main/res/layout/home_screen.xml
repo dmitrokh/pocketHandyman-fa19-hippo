@@ -26,6 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="365dp"
@@ -41,7 +44,7 @@
     </EditText>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/magnifying_glass"
         android:layout_width="31dp"
         android:layout_height="31dp"
         android:layout_marginTop="5dp"
@@ -49,6 +52,58 @@
         app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintTop_toTopOf="@+id/editText"
         app:srcCompat="@drawable/magnifying_glass" />
+
+    <Button
+        android:id="@+id/Home_appliance_button"
+        android:layout_width="159dp"
+        android:layout_height="159dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/home_appliance_button_background"
+        android:text="@string/Home_Appliances"
+        android:textColor="#FFFBFB"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <Button
+        android:id="@+id/Automotive"
+        android:layout_width="163dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/automotive_background"
+        android:text="@string/Automotive"
+        android:textColor="#FFFBFB"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Home_appliance_button" />
+
+    <Button
+        android:id="@+id/Home_Repairs"
+        android:layout_width="161dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/home_repairs_background"
+        android:text="@string/Home_repairs"
+        android:textColor="#FFFBFB"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Office_electronics" />
+
+    <Button
+        android:id="@+id/Office_electronics"
+        android:layout_width="161dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/office_electronics_background"
+        android:text="@string/Office_electronics"
+        android:textColor="#FFFBFB"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

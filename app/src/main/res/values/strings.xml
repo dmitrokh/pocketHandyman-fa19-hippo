@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PocketHandyman</string>
     <string name="title_activity_logo">Logo</string>
+    <string name="Home_Appliances">Home Appliances</string>
+    <string name="Office_electronics">Office Electronics</string>
+    <string name="Automotive">Automotive</string>
+    <string name="Home_repairs">Home Repairs</string>
 </resources>
