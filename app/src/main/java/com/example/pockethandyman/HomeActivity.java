@@ -89,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_question:
                         Intent a = new Intent(getApplicationContext(),AskQuestionActivity.class);
+                        a.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(a);
                         break;
 

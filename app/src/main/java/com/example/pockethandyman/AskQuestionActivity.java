@@ -3,7 +3,9 @@ package com.example.pockethandyman;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import org.w3c.dom.Text;
 
 public class AskQuestionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String categoryChosen;
@@ -30,11 +36,14 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
     private Button publishButton;
     private Spinner chooseCategory;
     private DatabaseReference dbReference;
+    private ChipGroup chipGroup;
+    private EditText tagField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
+
 
         chooseCategory = findViewById(R.id.spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.rubrik_array,
@@ -42,6 +51,30 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
         adapter.setDropDownViewResource(R.layout.spinner_dropdown);
         chooseCategory.setAdapter(adapter);
         chooseCategory.setOnItemSelectedListener(this);
+
+        chipGroup = findViewById(R.id.chipGroup);
+        tagField = (EditText) findViewById(R.id.tagField);
+
+        tagField.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if (s.toString().trim().length() > 2 && s.charAt(s.length() - 1) == ',') {
+                    Chip chip = new Chip(AskQuestionActivity.this);
+                    chip.setChipText("#" + s.subSequence(0, s.length() - 1));
+                    chip.setTextAppearance(R.style.ChipTextStyle);
+                    chipGroup.addView(chip);
+                    tagField.setText("");
+
+                }
+            }
+        });
 
         questionField = findViewById(R.id.questionField);
         publishButton = findViewById(R.id.publishButton);
@@ -93,12 +126,14 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
 
     private void setupBottomNavigationView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_question);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_question).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Intent a = new Intent(getApplicationContext(),HomeActivity.class);
+                        a.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(a);
 
                         break;
