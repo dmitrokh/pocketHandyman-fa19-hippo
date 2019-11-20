@@ -1,5 +1,6 @@
 package com.example.pockethandyman;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,6 +34,9 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
+
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         chooseCategory = findViewById(R.id.spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.rubrik_array,
@@ -109,6 +113,8 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
             }
         });
     }
+
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View v, int position, long id) {

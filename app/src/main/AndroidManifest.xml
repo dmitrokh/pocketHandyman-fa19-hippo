@@ -16,38 +16,41 @@
         <activity
             android:name=".LogoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-
-        <activity
-            android:name=".AskQuestionActivity"
-            android:label="@string/title_activity_ask_question">
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".EmailPasswordActivity"
             android:label="activity_email_password"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:parentActivityName=".LogoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LogoActivity" />
         </activity>
 
-
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_Home_Activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:parentActivityName=".EmailPasswordActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EmailPasswordActivity" />
+        </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+        <activity
+            android:name=".AskQuestionActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:label="@string/title_activity_ask_question"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
         </activity>
 
         <activity android:name=".ButtonActivity"/>
