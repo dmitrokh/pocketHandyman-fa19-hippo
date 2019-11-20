@@ -98,15 +98,19 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-
+                        intent = new Intent(AskQuestionActivity.this, HomeActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.navigation_question:
-
+                        // do nothing: you're already at ask question
                         break;
                     case R.id.navigation_account:
-
+                        // TODO: implement account activity
+//                        intent = new Intent(HomeActivity.this, AccountAcitvity.class);
+//                        startActivity(intent);
                         break;
                 }
                 return true;
