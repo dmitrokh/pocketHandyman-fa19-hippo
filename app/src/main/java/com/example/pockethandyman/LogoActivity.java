@@ -14,7 +14,7 @@ public class LogoActivity extends AppCompatActivity {
         setContentView(R.layout.logo);
 
         /*Duration of wait*/
-        int LOGO_DISPLAY_DURATION = 3000;
+        int LOGO_DISPLAY_DURATION = 2000;
 
         new Handler().postDelayed(new Runnable() {
             @Override
