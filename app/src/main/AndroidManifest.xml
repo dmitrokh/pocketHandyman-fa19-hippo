@@ -24,19 +24,14 @@
         </activity>
 
         <activity
-            android:name=".AskQuestionActivity"
-            android:label="@string/title_activity_ask_question">
-        </activity>
-
-        <activity
             android:name=".EmailPasswordActivity"
             android:label="activity_email_password"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:parentActivityName=".LogoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LogoActivity" />
         </activity>
-
 
         <activity
             android:name=".HomeActivity"
@@ -47,7 +42,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity
+            android:name=".AskQuestionActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:label="@string/title_activity_ask_question">
         </activity>
 
         <activity android:name=".ButtonActivity"/>
