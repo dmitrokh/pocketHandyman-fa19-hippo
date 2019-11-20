@@ -8,11 +8,13 @@ public class Question {
     private String question;
     private String category;
     private List<Timestamp> answers;
+    private List<String> tags;
 
     public Question(String question, String category) {
         this.question = question;
         this.category = category;
         answers = new ArrayList<>();
+        tags = new ArrayList<>();
     }
 
     public String getQuestion() {
@@ -37,5 +39,9 @@ public class Question {
 
     public void setAnswers(List<Timestamp> answers) {
         this.answers = answers;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }
