@@ -2,14 +2,19 @@ package com.example.pockethandyman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     Integer buttonSelector = null;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-    }
+        setupBottomNavigationView();
 
+    }
 
 
     public void OpenButtonActivity() {
@@ -69,5 +75,31 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         startActivity(intent);
+    }
+
+
+    private void setupBottomNavigationView() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        // do nothing: you're already at home
+                        break;
+                    case R.id.navigation_question:
+                        intent = new Intent(HomeActivity.this, AskQuestionActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.navigation_account:
+                        // TODO: implement account activity
+//                        intent = new Intent(HomeActivity.this, AccountAcitvity.class);
+//                        startActivity(intent);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 }

@@ -40,7 +40,7 @@ public class EmailPasswordActivity extends AppCompatActivity implements
 
         // Views
         mStatusTextView = findViewById(R.id.status);
-        mDetailTextView = findViewById(R.id.detail);
+//        mDetailTextView = findViewById(R.id.detail);
         mEmailField = findViewById(R.id.fieldEmail);
         mPasswordField = findViewById(R.id.fieldPassword);
 
@@ -119,8 +119,7 @@ public class EmailPasswordActivity extends AppCompatActivity implements
                             FirebaseUser user = mAuth.getCurrentUser();
 //                            updateUI(user);
 
-                            Intent intent = new Intent(EmailPasswordActivity.this, AskQuestionActivity.class);
-
+                            Intent intent = new Intent(EmailPasswordActivity.this, HomeActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -204,17 +203,20 @@ public class EmailPasswordActivity extends AppCompatActivity implements
         if (user != null) {
             String emailVerified = "Email User: " + user.getEmail() + " verified " + user.isEmailVerified();
             mStatusTextView.setText(emailVerified);
-            String userUid = "Firebase User: " + user.getUid();
-            mDetailTextView.setText(userUid);
+//            String userUid = "Firebase User: " + user.getUid();
+//            mDetailTextView.setText(userUid);
 
-            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
-            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
-            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
+//            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
+//            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
+//            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
+//
+//            findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
 
-            findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
+            Intent intent = new Intent(EmailPasswordActivity.this, HomeActivity.class);
+            startActivity(intent);
         } else {
             mStatusTextView.setText("Signed Out");
-            mDetailTextView.setText(null);
+//            mDetailTextView.setText(null);
 
             findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
             findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
