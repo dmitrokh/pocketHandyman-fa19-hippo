@@ -46,10 +46,9 @@
 
         <activity
             android:name=".AskQuestionActivity"
-            android:label=""
+            android:label="Ask Question"
             android:windowSoftInputMode="adjustPan"
-            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
-            android:parentActivityName=".HomeActivity">
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
