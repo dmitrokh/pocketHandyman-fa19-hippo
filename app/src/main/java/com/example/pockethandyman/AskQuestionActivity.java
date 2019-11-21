@@ -159,7 +159,6 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
     }
 
 
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View v, int position, long id) {
         categoryChosen = adapterView.getItemAtPosition(position).toString();

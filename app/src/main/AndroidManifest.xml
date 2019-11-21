@@ -46,7 +46,7 @@
 
         <activity
             android:name=".AskQuestionActivity"
-            android:label="@string/title_activity_ask_question"
+            android:label=""
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
             android:parentActivityName=".HomeActivity">
@@ -60,3 +60,4 @@
     </application>
 
 </manifest>
+
