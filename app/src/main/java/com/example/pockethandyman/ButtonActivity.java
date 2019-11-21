@@ -159,6 +159,7 @@ public class ButtonActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_question:
                         intent = new Intent(ButtonActivity.this, AskQuestionActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent);
                         break;
                     case R.id.navigation_account:
