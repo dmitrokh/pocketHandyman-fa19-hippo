@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#5E5E5E</color>
     <color name="colorAccent">#D81B60</color>
     <color name="bottomNavBarBackground">#EEEEEE</color>
+    <color name="logoColor">#EFA413</color>
 </resources>

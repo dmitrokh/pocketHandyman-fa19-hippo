@@ -1,6 +1,6 @@
 package com.example.pockethandyman;
 
-import android.app.ActionBar;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -45,8 +46,10 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
+
         chooseCategory = findViewById(R.id.spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.rubrik_array,
                 R.layout.spinner_item);
