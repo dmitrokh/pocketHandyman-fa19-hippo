@@ -14,7 +14,6 @@
         android:id="@+id/pocket_hand"
         android:layout_width="0dp"
         android:layout_height="85dp"
-
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="35dp"
@@ -112,18 +111,32 @@
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="?android:attr/windowBackground"-->
+<!--        android:scrollbarThumbHorizontal="@color/colorPrimary"-->
+<!--        android:scrollbarThumbVertical="@color/colorPrimary"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:menu="@menu/bottom_nav_menu"-->
+<!--        app:tabIndicatorColor="@color/colorPrimary" />-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
-        android:scrollbarThumbHorizontal="@color/colorPrimary"
-        android:scrollbarThumbVertical="@color/colorPrimary"
+        app:itemIconTint="#b2b2b2"
+        app:itemTextColor="#b2b2b2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:tabIndicatorColor="@color/colorPrimary" />
+        app:menu="@menu/bottom_nav_menu" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuideline"

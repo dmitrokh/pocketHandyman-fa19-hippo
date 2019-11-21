@@ -21,4 +21,23 @@
         <item name="android:backgroundTint">#ffffff</item>
     </style>
 
+
+<!--    Styles for bottom navigation bar -->
+<!--    <style name="BottomNavigationTheme1" parent="Theme.AppCompat.Light">-->
+<!--        <item name="colorPrimary">#c2c2c2</item>-->
+<!--        <item name="android:colorForeground">#d2d2d2</item>-->
+<!--    </style>-->
+
+
+<!--    <style name="BottomNavigationTheme2" parent="Widget.MaterialComponents.BottomNavigationView">-->
+<!--        <item name="itemTextAppearanceActive">@style/ActiveText</item>-->
+<!--        <item name="itemTextAppearanceInactive">@style/InactiveText</item>-->
+<!--    </style>-->
+<!--    <style name="ActiveText">-->
+<!--        <item name="android:textColor">#c2c2c2</item>-->
+<!--    </style>-->
+<!--    <style name="InactiveText">-->
+<!--        <item name="android:textColor">#d2d2d2</item>-->
+<!--    </style>-->
+
 </resources>
