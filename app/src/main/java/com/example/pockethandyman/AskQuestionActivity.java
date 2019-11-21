@@ -45,6 +45,8 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        
         chooseCategory = findViewById(R.id.spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.rubrik_array,
                 R.layout.spinner_item);

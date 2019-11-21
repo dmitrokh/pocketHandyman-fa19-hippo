@@ -13,18 +13,18 @@
     <TextView
         android:id="@+id/pocket_hand"
         android:layout_width="0dp"
-        android:layout_height="85dp"
+        android:layout_height="105dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="35dp"
         android:gravity="center_horizontal|top"
         android:text="POCKET HANDYMAN"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="#EFA413"
-        android:textSize="32sp"
+        android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,14 +35,15 @@
         android:layout_width="365dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/edittext_background"
+        android:text="    Search a question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pocket_hand"
         tools:text="    Search a question"
-        tools:textColor="#807E7E">
+        tools:textColor="#999595">
 
     </EditText>
 
@@ -58,10 +59,10 @@
 
     <Button
         android:id="@+id/Home_appliance_button"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/home_appliance_button_background"
         android:text="@string/Home_Appliances"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -71,10 +72,10 @@
 
     <Button
         android:id="@+id/Automotive"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/automotive_background"
         android:text="@string/Automotive"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -84,10 +85,10 @@
 
     <Button
         android:id="@+id/Home_Repairs"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/home_repairs_background"
         android:text="@string/Home_repairs"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -99,10 +100,10 @@
 
     <Button
         android:id="@+id/Office_electronics"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/office_electronics_background"
         android:text="@string/Office_electronics"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -124,15 +125,27 @@
 <!--        app:menu="@menu/bottom_nav_menu"-->
 <!--        app:tabIndicatorColor="@color/colorPrimary" />-->
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:background="?android:attr/windowBackground"-->
+<!--        app:itemIconTint="#b2b2b2"-->
+<!--        app:itemTextColor="#b2b2b2"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:menu="@menu/bottom_nav_menu" />-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="#b2b2b2"
-        app:itemTextColor="#b2b2b2"
+        android:background="@color/bottomNavBarBackground"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
