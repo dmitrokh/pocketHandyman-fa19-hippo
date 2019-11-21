@@ -10,11 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.MaterialComponents.Light.Bridge">
 
 
         <activity
             android:name=".LogoActivity"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,8 +46,9 @@
 
         <activity
             android:name=".AskQuestionActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:label=""
+            android:label="@string/title_activity_ask_question"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -7,14 +7,13 @@
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    android:paddingTop="?attr/actionBarSize">
+    android:paddingTop="20dp">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
         android:text=" Choose category:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,13 +21,14 @@
     <Spinner
         android:id="@+id/spinner"
         style="@style/spinner_style"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:textAlignment="gravity"
         android:textColor="#55AB55"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,125 +44,98 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="?android:attr/windowBackground"-->
+<!--        android:scrollbarThumbHorizontal="@color/colorPrimary"-->
+<!--        android:scrollbarThumbVertical="@color/colorPrimary"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"/>-->
+
     <EditText
         android:id="@+id/questionField"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/question"
         android:ems="10"
         android:gravity="start|top"
         android:hint="  Enter question here..."
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <Button
         android:id="@+id/publishButton"
         android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
+        android:backgroundTint="@color/colorPrimary"
         android:text="Publish"
         android:textAlignment="center"
-        android:textColor="#BBBBBB"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/questionField" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text=" What do you need help with?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
 
-    <!--    <android.support.design.widget.TextInputLayout-->
-<!--        android:id="@+id/userIDTextInputLayout"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_width="match_parent"-->
+    <TextView
+        android:id="@+id/tagTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:text="Enter keywords, model numbers, brands relevant to your question, separated with commas."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionField" />
 
-<!--        android:layout_height="wrap_content"-->
-<!--        tools:layout_editor_absoluteX="10dp"-->
-<!--        tools:layout_editor_absoluteY="66dp">-->
+    <EditText
+        android:id="@+id/tagField"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/question"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Whirlpool, WXIB8970DW"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagTextView" />
 
-<!--        <android.support.design.widget.TextInputEditText-->
-<!--            android:id="@+id/userIDTextInputEditText"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="User ID" />-->
-<!--    </android.support.design.widget.TextInputLayout>-->
-
-
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/messageTextInputLayout"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView"-->
-<!--        tools:layout_editor_absoluteX="10dp">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/passwordTextInputEditText"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:inputType="textMultiLine"-->
-<!--            android:scrollbars="vertical"-->
-<!--            android:hint="Enter question here" />-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="239dp"
+        android:layout_height="208dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="466dp"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagField"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!--    <ScrollView-->
-    <!--        android:id="@+id/sroller"-->
-    <!--        android:scrollbars="vertical"-->
-    <!--        android:fillViewport="true"-->
-    <!--        android:layout_width="373dp"-->
-    <!--        android:layout_height="363dp"-->
-    <!--        android:layout_marginStart="20dp"-->
-    <!--        android:layout_marginTop="5dp"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/textView">-->
-
-    <!--        <EditText-->
-    <!--            android:id="@+id/question"-->
-    <!--            android:layout_width="fill_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1.0"-->
-    <!--            android:hint="Enter your question..."-->
-    <!--            android:background="@android:color/transparent"-->
-    <!--            android:inputType="textMultiLine"-->
-    <!--            android:scrollHorizontally="false"-->
-    <!--            android:scrollbars="vertical"-->
-    <!--            android:textColorHint="#ff0000"-->
-    <!--            />-->
-    <!--    </ScrollView>-->
-
-
-
-    <!--    <fragment-->
-    <!--        android:id="@+id/nav_host_fragment"-->
-    <!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:defaultNavHost="true"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/nav_view"-->
-    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--        app:layout_constraintRight_toRightOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:navGraph="@navigation/mobile_navigation" />-->
