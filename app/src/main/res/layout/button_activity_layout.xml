@@ -9,12 +9,15 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="365dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/edittext_background"
+        android:focusableInTouchMode="false"
         android:textCursorDrawable="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="    Search a question"
@@ -59,9 +62,12 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="57dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
         app:tabIndicatorColor="@color/colorPrimary">
@@ -97,6 +103,7 @@
         android:layout_height="380dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
 
