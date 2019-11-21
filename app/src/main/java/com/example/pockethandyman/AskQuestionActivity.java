@@ -142,6 +142,7 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         intent = new Intent(AskQuestionActivity.this, HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent);
                         break;
                     case R.id.navigation_question:
