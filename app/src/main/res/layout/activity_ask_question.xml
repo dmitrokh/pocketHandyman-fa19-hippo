@@ -21,13 +21,14 @@
     <Spinner
         android:id="@+id/spinner"
         style="@style/spinner_style"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:textAlignment="gravity"
         android:textColor="#55AB55"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,36 +57,35 @@
 
     <EditText
         android:id="@+id/questionField"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/question"
         android:ems="10"
         android:gravity="start|top"
         android:hint="  Enter question here..."
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <Button
         android:id="@+id/publishButton"
         android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
         android:backgroundTint="@color/colorPrimary"
         android:text="Publish"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chipGroup"  />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -100,26 +100,30 @@
 
     <TextView
         android:id="@+id/tagTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
         android:text="Enter keywords, model numbers, brands relevant to your question, separated with commas."
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionField" />
 
     <EditText
         android:id="@+id/tagField"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:padding="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/question"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Whirlpool, WXIB8970DW"
         android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tagTextView" />
 
@@ -132,7 +136,6 @@
         android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tagField"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

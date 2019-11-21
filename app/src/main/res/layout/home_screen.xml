@@ -12,18 +12,21 @@
 
     <TextView
         android:id="@+id/pocket_hand"
-        android:layout_width="336dp"
+        android:layout_width="0dp"
         android:layout_height="85dp"
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="35dp"
         android:layout_marginTop="45dp"
+        android:layout_marginEnd="35dp"
         android:gravity="center_horizontal|top"
-        android:text="POCKET       HANDYMAN"
+        android:text="POCKET HANDYMAN"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#EFA413"
         android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +37,9 @@
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/edittext_background"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pocket_hand"
         tools:text="    Search a question"
@@ -54,57 +59,57 @@
 
     <Button
         android:id="@+id/Home_appliance_button"
-        android:layout_width="159dp"
-        android:layout_height="159dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/home_appliance_button_background"
         android:text="@string/Home_Appliances"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <Button
         android:id="@+id/Automotive"
-        android:layout_width="163dp"
-        android:layout_height="168dp"
-        android:layout_marginStart="36dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/automotive_background"
         android:text="@string/Automotive"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/Home_appliance_button" />
 
     <Button
         android:id="@+id/Home_Repairs"
-        android:layout_width="161dp"
-        android:layout_height="159dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="37dp"
         android:background="@drawable/home_repairs_background"
         android:text="@string/Home_repairs"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textColorLink="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/Office_electronics" />
 
     <Button
         android:id="@+id/Office_electronics"
-        android:layout_width="161dp"
-        android:layout_height="165dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="37dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/office_electronics_background"
         android:text="@string/Office_electronics"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
         android:textColorHighlight="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -119,6 +124,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu"
         app:tabIndicatorColor="@color/colorPrimary" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent=".5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
