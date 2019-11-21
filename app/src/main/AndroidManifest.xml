@@ -46,7 +46,7 @@
         <activity
             android:name=".AskQuestionActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:label="@string/title_activity_ask_question"
+            android:label=""
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
