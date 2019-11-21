@@ -1,17 +1,20 @@
 package com.example.pockethandyman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class ButtonActivity extends AppCompatActivity {
     String taskName = null;
     ViewPager viewPager;
     TabLayout tabLayout;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,8 @@ public class ButtonActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        setupBottomNavigationView();
     }
 
 
@@ -138,5 +144,32 @@ public class ButtonActivity extends AppCompatActivity {
             onBackPressed();
         }
         return true;
+    }
+
+    private void setupBottomNavigationView() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        // do nothing: you're already at home
+                        break;
+                    case R.id.navigation_question:
+                        intent = new Intent(ButtonActivity.this, AskQuestionActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                        break;
+                    case R.id.navigation_account:
+                        // TODO: implement account activity
+//                        intent = new Intent(HomeActivity.this, AccountAcitvity.class);
+//                        startActivity(intent);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 }
