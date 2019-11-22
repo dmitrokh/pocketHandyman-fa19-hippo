@@ -2,7 +2,6 @@ package com.example.pockethandyman;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,25 +34,10 @@ public class HomeActivity extends AppCompatActivity {
         globalVars = (Globals) getApplicationContext();
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("questions");
-        dbRef.addValueEventListener(new ValueEventListener() {
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String question = "",
-                            category = "";
-
-                    DataSnapshot questionSnapshot = ds.child("question");
-                    question = (String)questionSnapshot.getValue();
-                    DataSnapshot categorySnapshot = ds.child("category");
-                    category = (String)categorySnapshot.getValue();
-
-                    Question q = new Question(question, category);
-                    allQuestions.add(q);
-
-//                    Log.d(TAG, "question: " + question);
-                }
-
-                globalVars.setAllQuestions(allQuestions);
+                globalVars.retrieveQuestionsFromDB(dataSnapshot);
             }
 
             @Override
@@ -97,6 +81,8 @@ public class HomeActivity extends AppCompatActivity {
         setupBottomNavigationView();
 
     }
+
+
 
 
     public void OpenButtonActivity() {

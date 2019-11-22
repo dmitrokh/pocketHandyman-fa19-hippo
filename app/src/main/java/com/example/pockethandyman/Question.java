@@ -7,14 +7,14 @@ import java.util.List;
 public class Question {
     private String question;
     private String category;
-    private String name;
-    private List<Timestamp> answers;
+    private String author;
+    private List<Answer> answers;
     private List<String> tags;
 
-    public Question(String question, String category) {
+    public Question(String question, String category, List<Answer> answers) {
         this.question = question;
         this.category = category;
-        answers = new ArrayList<>();
+        this.answers = answers;
         tags = new ArrayList<>();
     }
 
@@ -34,11 +34,11 @@ public class Question {
         this.category = category;
     }
 
-    public List<Timestamp> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Timestamp> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
