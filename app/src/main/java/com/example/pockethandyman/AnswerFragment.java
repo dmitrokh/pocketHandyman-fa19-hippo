@@ -1,27 +1,40 @@
 package com.example.pockethandyman;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnswerFragment extends Fragment {
+    private static final String TAG = "AnswerFragment";
+    private final ArrayList<String> questionsForTask;
     private View view;
-
     private String title;//String for tab title
-
+    private String taskName;
     private static RecyclerView recyclerView;
+    private RecyclerView_Adapter adapter;
 
-
-    public AnswerFragment(String title) {
-        this.title = title;//Setting tab title
+    public AnswerFragment(String title, final String taskName, ArrayList<String> questionsForTask) {
+        this.title = title; // Setting tab title
+        this.taskName = taskName;
+        this.questionsForTask = questionsForTask;
     }
 
     @Nullable
@@ -30,24 +43,21 @@ public class AnswerFragment extends Fragment {
         view = inflater.inflate(R.layout.button_activity_fragment, container, false);
 
         setRecyclerView();
-        return view;
 
-    }
-    private void setRecyclerView() {
-
-        recyclerView = (RecyclerView) view
-                .findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView
-                .setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        return view;
+    }
 
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            arrayList.add(title+" Items " + i);
-        }
-        RecyclerView_Adapter adapter = new RecyclerView_Adapter(getActivity(), arrayList);
+    private void setRecyclerView() {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
         recyclerView.setAdapter(adapter);
-
     }
 }
