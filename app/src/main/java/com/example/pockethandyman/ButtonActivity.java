@@ -16,28 +16,33 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonActivity extends AppCompatActivity {
-
-    androidx.appcompat.widget.Toolbar toolbar;
+    private static final String TAG = "ButtonActivity";
     String taskName = null;
     ViewPager viewPager;
     TabLayout tabLayout;
+
     private BottomNavigationView bottomNavigationView;
+    private Globals globalVars;
+    private ArrayList<String> questionsForTask = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.button_activity_layout);
 
+        globalVars = (Globals) getApplicationContext();
+
         taskName = getIntent().getStringExtra("ActivityName");
-
-
-//        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
@@ -73,18 +78,30 @@ public class ButtonActivity extends AppCompatActivity {
     }
 
 
-    //Setting View Pager
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new AnswerFragment("ANDROID"), "ANDROID");
-        adapter.addFrag(new AnswerFragment("iOS"), "iOS");
-//        adapter.addFrag(new AnswerFragment("WINDOWS"), "WINDOWS");
-        viewPager.setAdapter(adapter);
+    private void getQuestionsForTask() {
+        ArrayList<Question> allQuestions = globalVars.getAllQuestions();
+
+        for (Question question : allQuestions) {
+            if (question.getCategory().equals(taskName)) {
+                questionsForTask.add(question.getQuestion());
+            }
+        }
     }
 
 
+    //Setting View Pager
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        getQuestionsForTask();
+
+        adapter.addFrag(new AnswerFragment("Unanswered questions", taskName, questionsForTask), "Unanswered");
+        adapter.addFrag(new AnswerFragment("Answered questions", taskName, questionsForTask), "Answered");
+        viewPager.setAdapter(adapter);
+    }
+
     //View Pager fragments setting adapter class
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();//fragment arraylist
         private final List<String> mFragmentTitleList = new ArrayList<>();//title arraylist
 
@@ -117,8 +134,6 @@ public class ButtonActivity extends AppCompatActivity {
 
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_repairs_menu, menu);
@@ -135,7 +150,6 @@ public class ButtonActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

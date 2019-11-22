@@ -30,18 +30,13 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder,
-                                 int position) {
-
-
+    public void onBindViewHolder(ViewHolder holder, int position) {
         final ViewHolder mainHolder = (ViewHolder) holder;
         mainHolder.title.setText(arrayList.get(position));
-
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(
-            ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
