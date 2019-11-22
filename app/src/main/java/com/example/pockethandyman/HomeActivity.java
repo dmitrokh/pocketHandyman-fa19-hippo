@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
                     Question q = new Question(question, category);
                     allQuestions.add(q);
 
-                    Log.d(TAG, "question: " + question);
+//                    Log.d(TAG, "question: " + question);
                 }
 
                 globalVars.setAllQuestions(allQuestions);

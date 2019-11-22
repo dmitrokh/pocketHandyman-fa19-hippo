@@ -30,15 +30,11 @@ public class AnswerFragment extends Fragment {
     private String taskName;
     private static RecyclerView recyclerView;
     private RecyclerView_Adapter adapter;
-//    private DatabaseReference dbRef;
-//    private ArrayList<String> questionsForTask = new ArrayList<>();
 
     public AnswerFragment(String title, final String taskName, ArrayList<String> questionsForTask) {
         this.title = title; // Setting tab title
         this.taskName = taskName;
         this.questionsForTask = questionsForTask;
-
-//        dbRef = FirebaseDatabase.getInstance().getReference().child("questions");
     }
 
     @Nullable
@@ -52,56 +48,14 @@ public class AnswerFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
-//        recyclerView.setAdapter(adapter);
-
         return view;
     }
 
 
     private void setRecyclerView() {
-//        final ArrayList<String> questionsForTask = new ArrayList<>();
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        ArrayList<String> arrayList = new ArrayList<>();
-//        for (int i = 0; i < 3; i++) {
-//            arrayList.add(title+" Items " + i);
-//        }
-
-//        final RecyclerView_Adapter adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
-//        recyclerView.setAdapter(adapter);
-
-//        dbRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String question = "",
-//                       category = "";
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    DataSnapshot questionSnapshot = ds.child("question");
-//                    question = (String)questionSnapshot.getValue();
-//
-//                    DataSnapshot categorySnapshot = ds.child("category");
-//                    category = (String)categorySnapshot.getValue();
-//
-//                    if (category.equals(taskName)) {
-//                        questionsForTask.add(question);
-//                    }
-//                }
-//
-//                Log.d(TAG, "question: " + question);
-//
-//                adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
-//                recyclerView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
         adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
         recyclerView.setAdapter(adapter);

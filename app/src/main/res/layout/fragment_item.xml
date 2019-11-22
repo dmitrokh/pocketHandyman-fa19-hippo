@@ -10,41 +10,31 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="7dp">
 
-    <TextView
-        android:id="@+id/cardTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textColor="#000000"
-        android:textSize="17sp" />
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/cardTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/answerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/custom_button2"
+            android:text="Answer"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"/>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
 
-
-<!--<LinearLayout-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:orientation="vertical"-->
-<!--    >-->
-
-<!--<TextView-->
-<!--    android:id="@+id/cardTitle"-->
-<!--    android:layout_width="fill_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:padding="15dp"-->
-<!--    android:textColor="#000000"-->
-<!--    android:textSize="17sp" />-->
-
-<!--<TextView-->
-<!--    android:id="@+id/question"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent" />-->
-
-<!--<Button-->
-<!--    android:id="@+id/button"-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:text="Button" />-->
-
-<!--</LinearLayout>-->
+<!-- This is a layout for "row" item in the recycle view -->
