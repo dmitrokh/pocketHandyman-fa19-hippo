@@ -1,15 +1,15 @@
 package com.example.pockethandyman;
 
 public class Answer {
-    public String answer;
+    public String answerText;
     public String author;
 
     public Answer() {
 
     }
 
-    public Answer(String answer, String author) {
-        this.answer = answer;
+    public Answer(String answerText, String author) {
+        this.answerText = answerText;
         this.author = author;
     }
 }

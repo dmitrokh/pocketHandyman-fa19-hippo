@@ -11,6 +11,10 @@ public class Question {
     private List<Answer> answers;
     private List<String> tags;
 
+    public Question(String question, String category) {
+        this(question, category, new ArrayList<Answer>());
+    }
+
     public Question(String question, String category, List<Answer> answers) {
         this.question = question;
         this.category = category;

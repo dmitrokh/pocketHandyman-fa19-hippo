@@ -2,13 +2,7 @@ package com.example.pockethandyman;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,29 +20,16 @@ public class Globals extends Application {
             final String category = ds.child("category").getValue(String.class);
 
             // Get answer IDs within question
-            final DataSnapshot answersSnapshot = ds.child("answers");
-            // Get table aof all answers
-            final DatabaseReference answersRef = FirebaseDatabase.getInstance().getReference("answers");
-            answersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot allAnswersSnapshot) {
-                    ArrayList<Answer> answers = new ArrayList<>();
-                    // Match each answer ID within question to the answers table
-                    for (DataSnapshot childSnapshot : answersSnapshot.getChildren()) {
-                        String id = childSnapshot.getValue(String.class);
-                        Answer answer = allAnswersSnapshot.child(id).getValue(Answer.class);
-                        answers.add(answer);
-                    }
+            DataSnapshot answersSnapshot = ds.child("answers");
+            ArrayList<Answer> answers = new ArrayList<>();
+            // Get each answer from the question
+            for (DataSnapshot childSnapshot : answersSnapshot.getChildren()) {
+                Answer answer = childSnapshot.getValue(Answer.class);
+                answers.add(answer);
+            }
 
-                    Question q = new Question(question, category, answers);
-                    allQuestions.add(q);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+            Question q = new Question(question, category, answers);
+            allQuestions.add(q);
         }
     }
 }

@@ -17,23 +17,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class AnsweredQuestionActivity extends AppCompatActivity {
+
+    private Globals globalVars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answered_question);
 
-        RecyclerView answers = findViewById(R.id.answers);
+        final RecyclerView answersRecyclerView = findViewById(R.id.answers);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        answers.setLayoutManager(layoutManager);
+        answersRecyclerView.setLayoutManager(layoutManager);
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference answersRef = db.child("questions/-137611763/answers");
-        answersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        globalVars = (Globals) getApplicationContext();
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("questions");
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("answered question", dataSnapshot.toString());
+                globalVars.retrieveQuestionsFromDB(dataSnapshot);
+                List<Answer> answers = globalVars.getAllQuestions().get(0).getAnswers();
+                RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers);
+                answersRecyclerView.setAdapter(answerAdapter);
             }
 
             @Override
@@ -41,9 +48,6 @@ public class AnsweredQuestionActivity extends AppCompatActivity {
 
             }
         });
-
-        RecyclerView.Adapter answerAdapter = new AnswerAdapter();
-        answers.setAdapter(answerAdapter);
 
         setupBottomNavigationView();
     }
