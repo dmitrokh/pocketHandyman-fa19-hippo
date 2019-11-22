@@ -2,6 +2,7 @@ package com.example.pockethandyman;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,9 @@ public class AnsweredQuestionActivity extends AppCompatActivity {
         final RecyclerView answersRecyclerView = findViewById(R.id.answers);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         answersRecyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                answersRecyclerView.getContext(), layoutManager.getOrientation());
+        answersRecyclerView.addItemDecoration(dividerItemDecoration);
 
         globalVars = (Globals) getApplicationContext();
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("questions");
