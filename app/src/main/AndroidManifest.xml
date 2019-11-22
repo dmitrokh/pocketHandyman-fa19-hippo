@@ -11,11 +11,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.Bridge">
-
-
         <activity
             android:name=".LogoActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".EmailPasswordActivity"
+            android:label="activity_email_password"
+            android:parentActivityName=".LogoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LogoActivity" />
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_Home_Activity"
+            android:parentActivityName=".EmailPasswordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EmailPasswordActivity" />
+        </activity>
+        <activity
+            android:name=".AskQuestionActivity"
+            android:label="Ask Question"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity android:name=".ButtonActivity" />
+        <activity
+            android:name=".AnsweredQuestionActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,40 +58,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".EmailPasswordActivity"
-            android:label="activity_email_password"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:parentActivityName=".LogoActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LogoActivity" />
-        </activity>
-
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_Home_Activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:parentActivityName=".EmailPasswordActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".EmailPasswordActivity" />
-        </activity>
-
-        <activity
-            android:name=".AskQuestionActivity"
-            android:label="Ask Question"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
-        </activity>
-
-        <activity android:name=".ButtonActivity"/>
-
     </application>
 
 </manifest>
-

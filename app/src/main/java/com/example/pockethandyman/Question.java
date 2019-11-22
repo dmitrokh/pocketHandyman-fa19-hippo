@@ -7,6 +7,7 @@ import java.util.List;
 public class Question {
     private String question;
     private String category;
+    private String name;
     private List<Timestamp> answers;
     private List<String> tags;
 
