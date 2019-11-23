@@ -39,7 +39,6 @@ public class AnswerActivity extends AppCompatActivity {
 
         Question question = (Question) getIntent().getSerializableExtra("question");
         List<Answer> answers = question.getAnswers();
-        Log.e("answer activity", Integer.toString(answers.size()));
         RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers);
         answersRecyclerView.setAdapter(answerAdapter);
 
@@ -57,7 +56,6 @@ public class AnswerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }

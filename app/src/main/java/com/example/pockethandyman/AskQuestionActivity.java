@@ -31,6 +31,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity for asking a question
+ */
 public class AskQuestionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String categoryChosen;
     private BottomNavigationView bottomNavigationView;

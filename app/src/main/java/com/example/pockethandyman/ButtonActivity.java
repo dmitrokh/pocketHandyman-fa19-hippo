@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Activity that is run when a user clicks on a category in the home screen
+ * Activity that handles displaying the questions for a specified category
  */
 public class ButtonActivity extends AppCompatActivity {
     private static final String TAG = "ButtonActivity";

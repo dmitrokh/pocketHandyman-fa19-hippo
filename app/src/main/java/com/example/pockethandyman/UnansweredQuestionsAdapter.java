@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * Adapter that handles displaying unanswered questions in a RecyclerView
+ */
 public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<UnansweredQuestionsAdapter.ViewHolder> {
 
     private List<Question> questions;

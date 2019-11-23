@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * Adapter that handles displaying answered questions in a RecyclerView
+ */
 public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuestionsAdapter.ViewHolder> {
 
     private List<Question> questions;
