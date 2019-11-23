@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/cardTitle2"
+            android:id="@+id/questionTitle"
             android:layout_width="391dp"
             android:layout_height="53dp"
             android:padding="15dp"
@@ -27,24 +27,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/profilePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardTitle2"
+            app:layout_constraintTop_toBottomOf="@+id/questionTitle"
             app:srcCompat="@drawable/ic_perm_identity_black_24dp" />
 
         <TextView
-            android:id="@+id/UserName"
+            android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="12dp"
-            android:text="Connor Griffith, UC Berkeley"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/cardTitle2" />
+            android:text="Anonymous"
+            app:layout_constraintStart_toEndOf="@+id/profilePic"
+            app:layout_constraintTop_toBottomOf="@+id/questionTitle" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -53,7 +53,7 @@
             android:layout_marginStart="125dp"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/UserName"
+            app:layout_constraintTop_toBottomOf="@+id/author"
             app:srcCompat="@drawable/movie_icon" />
 
 

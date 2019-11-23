@@ -10,21 +10,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class AnswerFragment extends Fragment {
-    private static final String TAG = "QuestionsFragment";
-    private final ArrayList<String> answerTitles;
+public class AnsweredQuestionsFragment extends Fragment {
+    private static final String TAG = "QuestionsListFragment";
+    private List<Question> questionsForTask;
     private View view;
     private String title;//String for tab title
     private String taskName;
     private static RecyclerView recyclerView;
-    private Answer_RecyclerView_Adapter adapter;
+    private AnsweredQuestionsAdapter adapter;
 
-    public AnswerFragment(String title, final String taskName, ArrayList<String> answerTitles) {
+    public AnsweredQuestionsFragment(String title, final String taskName, List<Question> questionsForTask) {
         this.title = title; // Setting tab title
         this.taskName = taskName;
-        this.answerTitles = answerTitles;
+        this.questionsForTask = questionsForTask;
     }
 
     @Nullable
@@ -32,22 +32,12 @@ public class AnswerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.button_activity_fragment, container, false);
 
-        setRecyclerView();
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new AnsweredQuestionsAdapter(getActivity(), questionsForTask);
+        recyclerView.setAdapter(adapter);
 
         return view;
-    }
-
-
-    private void setRecyclerView() {
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        adapter = new Answer_RecyclerView_Adapter(getActivity(), answerTitles);
-        recyclerView.setAdapter(adapter);
     }
 }
