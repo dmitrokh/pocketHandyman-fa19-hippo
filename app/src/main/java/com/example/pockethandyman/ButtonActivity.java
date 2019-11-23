@@ -105,9 +105,9 @@ public class ButtonActivity extends AppCompatActivity {
 
         Map<String, List<Question>> questions = getQuestionsForTask();
 
-        adapter.addFrag(new QuestionsListFragment("Unanswered questions", taskName,
+        adapter.addFrag(new UnansweredQuestionsFragment("Unanswered questions", taskName,
                 questions.get("unanswered")), "Unanswered");
-        adapter.addFrag(new QuestionsListFragment("Answered questions", taskName,
+        adapter.addFrag(new AnsweredQuestionsFragment("Answered questions", taskName,
                 questions.get("answered")), "Answered");
         viewPager.setAdapter(adapter);
     }
