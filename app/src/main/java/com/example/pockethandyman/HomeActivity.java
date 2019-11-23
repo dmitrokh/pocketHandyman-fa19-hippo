@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
@@ -25,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Globals globalVars;
     private DatabaseReference dbRef;
-    private ArrayList<Question> allQuestions = new ArrayList<>();
+    private HashMap<Integer, Question> allQuestions = new HashMap<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,31 @@ public class HomeActivity extends AppCompatActivity {
                     String question = "",
                             category = "";
 
+                    ArrayList<Answer> answers = null;
+                    ArrayList<String> tags = null;
+
                     DataSnapshot questionSnapshot = ds.child("question");
                     question = (String)questionSnapshot.getValue();
+
                     DataSnapshot categorySnapshot = ds.child("category");
                     category = (String)categorySnapshot.getValue();
 
                     Question q = new Question(question, category);
-                    allQuestions.add(q);
+
+                    if (ds.hasChild("answers")) {
+                        DataSnapshot answersSnapshot = ds.child("answers");
+                        answers = (ArrayList<Answer>)answersSnapshot.getValue();
+                        q.setAnswers(answers);
+                    }
+
+                    if (ds.hasChild("tags")) {
+                        DataSnapshot tagsSnapshot = ds.child("tags");
+                        tags = (ArrayList<String>)tagsSnapshot.getValue();
+                        q.setTags(tags);
+                    }
+
+                    int hashOfQuestionString = question.hashCode();
+                    allQuestions.put(hashOfQuestionString, q);
 
 //                    Log.d(TAG, "question: " + question);
                 }

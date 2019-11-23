@@ -18,25 +18,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-
-
-    public TextView title;
+    public TextView questionTextView;
     public Button answerButton;
-
+    public String taskName;
+    public String question;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        this.title = (TextView) itemView.findViewById(R.id.cardTitle);
+        this.questionTextView = (TextView) itemView.findViewById(R.id.cardTitle);
         this.answerButton = itemView.findViewById(R.id.answerButton);
 
         answerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // TODO: implement answer questions logic here
-//                Intent intent = new Intent (v.getContext(), GoToSomewhere.class);
-//                v.getContext().startActivity(intent);
+                Intent intent = new Intent (v.getContext(), AnswerQuestionActivity.class);
+                intent.putExtra("Question",  question);
+                v.getContext().startActivity(intent);
             }
         });
 

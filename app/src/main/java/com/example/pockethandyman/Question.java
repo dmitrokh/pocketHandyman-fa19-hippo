@@ -7,7 +7,7 @@ import java.util.List;
 public class Question {
     private String question;
     private String category;
-    private List<Timestamp> answers;
+    private List<Answer> answers;
     private List<String> tags;
 
     public Question(String question, String category) {
@@ -33,11 +33,11 @@ public class Question {
         this.category = category;
     }
 
-    public List<Timestamp> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Timestamp> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 

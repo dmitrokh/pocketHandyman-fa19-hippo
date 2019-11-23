@@ -9,31 +9,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
-
-    private ArrayList<String> arrayList;
     private Context context;
+    private ArrayList<Question> questionsForTask;
+    private String taskName;
 
 
     public RecyclerView_Adapter(Context context,
-                                ArrayList<String> arrayList) {
+                                ArrayList<Question> questionsForTask,
+                                String taskName) {
         this.context = context;
-        this.arrayList = arrayList;
-
+        this.questionsForTask = questionsForTask;
+        this.taskName = taskName;
     }
 
 
     @Override
     public int getItemCount() {
-        return (null != arrayList ? arrayList.size() : 0);
-
-
+        return (null != questionsForTask ? questionsForTask.size() : 0);
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ViewHolder mainHolder = (ViewHolder) holder;
-        mainHolder.title.setText(arrayList.get(position));
+
+        Question curQuestion = questionsForTask.get(position);
+        String questionString = curQuestion.getQuestion();
+
+        mainHolder.questionTextView.setText(questionString);
+        mainHolder.question = questionString;
+
+        mainHolder.taskName = this.taskName;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {

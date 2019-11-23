@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ButtonActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class ButtonActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private Globals globalVars;
-    private ArrayList<String> questionsForTask = new ArrayList<>();
+    private ArrayList<Question> questionsForTask = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,11 +80,13 @@ public class ButtonActivity extends AppCompatActivity {
 
 
     private void getQuestionsForTask() {
-        ArrayList<Question> allQuestions = globalVars.getAllQuestions();
+        HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
 
-        for (Question question : allQuestions) {
+        for (Integer hash : allQuestions.keySet()) {
+            Question question = allQuestions.get(hash);
+
             if (question.getCategory().equals(taskName)) {
-                questionsForTask.add("Q: " + question.getQuestion());
+                questionsForTask.add(question);
             }
         }
     }

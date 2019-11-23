@@ -24,14 +24,14 @@ import java.util.List;
 
 public class AnswerFragment extends Fragment {
     private static final String TAG = "AnswerFragment";
-    private final ArrayList<String> questionsForTask;
+    private final ArrayList<Question> questionsForTask;
     private View view;
     private String title;//String for tab title
     private String taskName;
     private static RecyclerView recyclerView;
     private RecyclerView_Adapter adapter;
 
-    public AnswerFragment(String title, final String taskName, ArrayList<String> questionsForTask) {
+    public AnswerFragment(String title, final String taskName, ArrayList<Question> questionsForTask) {
         this.title = title; // Setting tab title
         this.taskName = taskName;
         this.questionsForTask = questionsForTask;
@@ -57,7 +57,7 @@ public class AnswerFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
+        adapter = new RecyclerView_Adapter(getActivity(), questionsForTask, taskName);
         recyclerView.setAdapter(adapter);
     }
 }
