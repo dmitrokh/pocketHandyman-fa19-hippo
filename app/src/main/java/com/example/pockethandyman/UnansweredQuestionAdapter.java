@@ -6,33 +6,23 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
+public class UnansweredQuestionAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private ArrayList<String> arrayList;
+    private List<Question> questions;
     private Context context;
 
 
-    public RecyclerView_Adapter(Context context,
-                                ArrayList<String> arrayList) {
+    public UnansweredQuestionAdapter(Context context,
+                                     List<Question> questions) {
         this.context = context;
-        this.arrayList = arrayList;
-
+        this.questions = questions;
     }
-
 
     @Override
     public int getItemCount() {
-        return (null != arrayList ? arrayList.size() : 0);
-
-
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final ViewHolder mainHolder = (ViewHolder) holder;
-        mainHolder.title.setText(arrayList.get(position));
+        return questions != null ? questions.size() : 0;
     }
 
     @Override
@@ -40,7 +30,7 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
-                R.layout.fragment_item, viewGroup, false);
+                R.layout.fragment_unanswered_question, viewGroup, false);
         ViewHolder mainHolder = new ViewHolder(mainGroup) {
             @Override
             public String toString() {
@@ -50,6 +40,10 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
 
 
         return mainHolder;
+    }
 
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.title.setText(questions.get(position).getQuestion());
     }
 }

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class AnsweredQuestionActivity extends AppCompatActivity {
+public class AnswerActivity extends AppCompatActivity {
 
     private Globals globalVars;
 
@@ -68,7 +67,7 @@ public class AnsweredQuestionActivity extends AppCompatActivity {
                         // do nothing: you're already at home
                         break;
                     case R.id.navigation_question:
-                        intent = new Intent(AnsweredQuestionActivity.this, AskQuestionActivity.class);
+                        intent = new Intent(AnswerActivity.this, AskQuestionActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent);
                         break;
