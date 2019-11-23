@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,12 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Activity to view a question and its answers
+ */
 public class AnswerActivity extends AppCompatActivity {
-
-    private Globals globalVars;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,24 +37,31 @@ public class AnswerActivity extends AppCompatActivity {
                 answersRecyclerView.getContext(), layoutManager.getOrientation());
         answersRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        globalVars = (Globals) getApplicationContext();
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("questions");
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                globalVars.retrieveQuestionsFromDB(dataSnapshot);
-                List<Answer> answers = globalVars.getAllQuestions().get(0).getAnswers();
-                RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers);
-                answersRecyclerView.setAdapter(answerAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        Question question = (Question) getIntent().getSerializableExtra("question");
+        List<Answer> answers = question.getAnswers();
+        Log.e("answer activity", Integer.toString(answers.size()));
+        RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers);
+        answersRecyclerView.setAdapter(answerAdapter);
 
         setupBottomNavigationView();
+        setActionBar(question);
+    }
+
+    private void setActionBar(Question question) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(question.getCategory());
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return true;
     }
 
     private void setupBottomNavigationView() {

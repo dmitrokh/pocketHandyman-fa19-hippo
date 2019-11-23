@@ -1,21 +1,23 @@
 package com.example.pockethandyman;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class UnansweredQuestionAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private List<Question> questions;
     private Context context;
 
 
-    public UnansweredQuestionAdapter(Context context,
-                                     List<Question> questions) {
+    public QuestionAdapter(Context context,
+                           List<Question> questions) {
         this.context = context;
         this.questions = questions;
     }
@@ -30,20 +32,29 @@ public class UnansweredQuestionAdapter extends RecyclerView.Adapter<ViewHolder> 
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
-                R.layout.fragment_unanswered_question, viewGroup, false);
+                R.layout.item_question, viewGroup, false);
+
         ViewHolder mainHolder = new ViewHolder(mainGroup) {
             @Override
             public String toString() {
                 return super.toString();
             }
         };
-
-
         return mainHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(questions.get(position).getQuestion());
+        final Question question = questions.get(position);
+        holder.title.setText(question.getQuestion());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AnswerActivity.class);
+                intent.putExtra("question", question);
+                context.startActivity(intent);
+            }
+        });
     }
 }

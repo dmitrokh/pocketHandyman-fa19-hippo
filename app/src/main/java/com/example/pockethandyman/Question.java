@@ -1,10 +1,11 @@
 package com.example.pockethandyman;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable {
     private String question;
     private String category;
     private String author;
