@@ -5,16 +5,26 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<UnansweredQuestionsAdapter.ViewHolder> {
 
     private List<Question> questions;
     private Context context;
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView title;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.cardTitle);
+        }
+    }
 
     public UnansweredQuestionsAdapter(Context context,
                                       List<Question> questions) {
@@ -34,13 +44,7 @@ public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<ViewHolder>
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
                 R.layout.item_question, viewGroup, false);
 
-        ViewHolder mainHolder = new ViewHolder(mainGroup) {
-            @Override
-            public String toString() {
-                return super.toString();
-            }
-        };
-        return mainHolder;
+        return new ViewHolder(mainGroup);
     }
 
     @Override

@@ -5,24 +5,31 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Answer_RecyclerView_Adapter extends RecyclerView.Adapter<Answer_ViewHolder> {
+public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuestionsAdapter.ViewHolder> {
 
     private List<Question> questions;
     private Context context;
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView title;
 
-    public Answer_RecyclerView_Adapter(Context context, List<Question> questions) {
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.title = itemView.findViewById(R.id.cardTitle2);
+        }
+    }
+
+    public AnsweredQuestionsAdapter(Context context, List<Question> questions) {
         this.context = context;
         this.questions = questions;
     }
-
 
     @Override
     public int getItemCount() {
@@ -30,22 +37,16 @@ public class Answer_RecyclerView_Adapter extends RecyclerView.Adapter<Answer_Vie
     }
 
     @Override
-    public Answer_ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
                 R.layout.fragment_answer_item, viewGroup, false);
-        Answer_ViewHolder answer_viewHolder = new Answer_ViewHolder(mainGroup) {
-            @Override
-            public String toString() {
-                return super.toString();
-            }
-        };
-        return answer_viewHolder;
+        return new ViewHolder(mainGroup);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Answer_ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Question question = questions.get(position);
         holder.title.setText(question.getQuestion());
 

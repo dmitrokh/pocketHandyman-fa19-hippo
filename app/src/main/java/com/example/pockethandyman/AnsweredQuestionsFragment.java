@@ -19,7 +19,7 @@ public class AnsweredQuestionsFragment extends Fragment {
     private String title;//String for tab title
     private String taskName;
     private static RecyclerView recyclerView;
-    private Answer_RecyclerView_Adapter adapter;
+    private AnsweredQuestionsAdapter adapter;
 
     public AnsweredQuestionsFragment(String title, final String taskName, List<Question> questionsForTask) {
         this.title = title; // Setting tab title
@@ -35,7 +35,7 @@ public class AnsweredQuestionsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new Answer_RecyclerView_Adapter(getActivity(), questionsForTask);
+        adapter = new AnsweredQuestionsAdapter(getActivity(), questionsForTask);
         recyclerView.setAdapter(adapter);
 
         return view;
