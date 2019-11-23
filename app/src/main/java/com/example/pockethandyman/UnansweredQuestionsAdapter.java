@@ -22,7 +22,7 @@ public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<UnansweredQ
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.cardTitle);
+            title = itemView.findViewById(R.id.questionTitle);
         }
     }
 
@@ -42,7 +42,7 @@ public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<UnansweredQ
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
-                R.layout.item_question, viewGroup, false);
+                R.layout.item_unanswered_question, viewGroup, false);
 
         return new ViewHolder(mainGroup);
     }

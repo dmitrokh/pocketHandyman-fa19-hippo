@@ -16,7 +16,7 @@
     android:orientation="vertical">
 
         <TextView
-            android:id="@+id/cardTitle"
+            android:id="@+id/questionTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"

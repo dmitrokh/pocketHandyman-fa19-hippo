@@ -12,13 +12,14 @@ public class Question implements Serializable {
     private List<Answer> answers;
     private List<String> tags;
 
-    public Question(String question, String category) {
-        this(question, category, new ArrayList<Answer>());
+    public Question(String question, String category, String author) {
+        this(question, category, author, new ArrayList<Answer>());
     }
 
-    public Question(String question, String category, List<Answer> answers) {
+    public Question(String question, String category, String author, List<Answer> answers) {
         this.question = question;
         this.category = category;
+        this.author = author;
         this.answers = answers;
         tags = new ArrayList<>();
     }
@@ -49,5 +50,13 @@ public class Question implements Serializable {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

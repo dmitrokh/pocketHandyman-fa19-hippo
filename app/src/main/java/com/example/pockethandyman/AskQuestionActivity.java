@@ -105,7 +105,8 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                     String question = questionField.getText().toString();
                     int hash = question.hashCode();
 //                    String hashString = String.valueOf(hash);
-                    Question toAsk = new Question(question, categoryChosen);
+                    // TODO: SET AUTHOR
+                    Question toAsk = new Question(question, categoryChosen, null);
 
                     List<String> tags = new ArrayList<>();
                     for (int i = 0; i < chipGroup.getChildCount(); i++) {

@@ -18,6 +18,7 @@ public class Globals extends Application {
         for (DataSnapshot ds : allQuestionsSnapshot.getChildren()) {
             final String question = ds.child("question").getValue(String.class);
             final String category = ds.child("category").getValue(String.class);
+            final String author = ds.child("author").getValue(String.class);
 
             // Get answer IDs within question
             DataSnapshot answersSnapshot = ds.child("answers");
@@ -28,7 +29,7 @@ public class Globals extends Application {
                 answers.add(answer);
             }
 
-            Question q = new Question(question, category, answers);
+            Question q = new Question(question, category, author, answers);
             allQuestions.add(q);
         }
     }
