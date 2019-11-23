@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +89,7 @@ public class ButtonActivity extends AppCompatActivity {
 
         getQuestionsForTask();
 
-        adapter.addFrag(new AnswerFragment("Unanswered questions", taskName, questionsForTask), "Unanswered");
+        adapter.addFrag(new QuestionsFragment("Unanswered questions", taskName, questionsForTask), "Unanswered");
         adapter.addFrag(new AnswerFragment("Answered questions", taskName, questionsForTask), "Answered");
         viewPager.setAdapter(adapter);
     }

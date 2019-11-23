@@ -1,30 +1,40 @@
 package com.example.pockethandyman;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class AnswerFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class QuestionsFragment extends Fragment {
     private static final String TAG = "QuestionsFragment";
-    private final ArrayList<String> answerTitles;
+    private final ArrayList<String> questionsForTask;
     private View view;
     private String title;//String for tab title
     private String taskName;
     private static RecyclerView recyclerView;
-    private Answer_RecyclerView_Adapter adapter;
+    private RecyclerView_Adapter adapter;
 
-    public AnswerFragment(String title, final String taskName, ArrayList<String> answerTitles) {
+    public QuestionsFragment(String title, final String taskName, ArrayList<String> questionsForTask) {
         this.title = title; // Setting tab title
         this.taskName = taskName;
-        this.answerTitles = answerTitles;
+        this.questionsForTask = questionsForTask;
     }
 
     @Nullable
@@ -47,7 +57,7 @@ public class AnswerFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new Answer_RecyclerView_Adapter(getActivity(), answerTitles);
+        adapter = new RecyclerView_Adapter(getActivity(), questionsForTask);
         recyclerView.setAdapter(adapter);
     }
 }
