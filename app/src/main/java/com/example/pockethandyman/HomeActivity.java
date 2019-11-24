@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
@@ -24,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Globals globalVars;
     private DatabaseReference dbRef;
-    private ArrayList<Question> allQuestions = new ArrayList<>();
+    private HashMap<Integer, Question> allQuestions = new HashMap<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,51 @@ public class HomeActivity extends AppCompatActivity {
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                globalVars.retrieveQuestionsFromDB(dataSnapshot);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String question = "",
+                            category = "";
+
+                    ArrayList<Answer> answers = new ArrayList<>();
+                    ArrayList<String> tags = null;
+
+                    DataSnapshot questionSnapshot = ds.child("question");
+                    question = (String)questionSnapshot.getValue();
+
+                    DataSnapshot categorySnapshot = ds.child("category");
+                    category = (String)categorySnapshot.getValue();
+
+                    String author = ds.child("author").getValue(String.class);
+
+                    Question q = new Question(question, category, author);
+
+                    if (ds.hasChild("answers")) {
+                        DataSnapshot answersSnapshot = ds.child("answers");
+                        // Get each answer from the question
+                        for (DataSnapshot childSnapshot : answersSnapshot.getChildren()) {
+                            Answer answer = childSnapshot.getValue(Answer.class);
+                            answers.add(answer);
+                        }
+
+                        q.setAnswers(answers);
+
+//                        DataSnapshot answersSnapshot = ds.child("answers");
+//                        answers = (ArrayList<Answer>)answersSnapshot.getValue();
+//                        q.setAnswers(answers);
+                    }
+
+                    if (ds.hasChild("tags")) {
+                        DataSnapshot tagsSnapshot = ds.child("tags");
+                        tags = (ArrayList<String>)tagsSnapshot.getValue();
+                        q.setTags(tags);
+                    }
+
+                    int hashOfQuestionString = question.hashCode();
+                    allQuestions.put(hashOfQuestionString, q);
+
+//                    Log.d(TAG, "question: " + question);
+                }
+
+                globalVars.setAllQuestions(allQuestions);
             }
 
             @Override

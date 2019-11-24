@@ -75,14 +75,17 @@ public class ButtonActivity extends AppCompatActivity {
         setupBottomNavigationView();
     }
 
+
     // Get all questions for the current category, and split by answered/unanswered
     private HashMap<String, List<Question>> getQuestionsForTask() {
-        ArrayList<Question> allQuestions = globalVars.getAllQuestions();
+        HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
 
         ArrayList<Question> unansweredQuestions = new ArrayList<>();
         ArrayList<Question> answeredQuestions = new ArrayList<>();
 
-        for (Question question : allQuestions) {
+        for (int hashOfQuestion : allQuestions.keySet()) {
+            Question question = allQuestions.get(hashOfQuestion);
+
             if (question.getCategory().equals(taskName)) {
                 if (question.getAnswers().size() == 0) {
                     unansweredQuestions.add(question);

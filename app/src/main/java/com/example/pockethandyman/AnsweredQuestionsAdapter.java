@@ -21,6 +21,7 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
     private List<Question> questions;
     private Context context;
 
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView author;
@@ -31,6 +32,7 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
             this.author = itemView.findViewById(R.id.author);
         }
     }
+
 
     public AnsweredQuestionsAdapter(Context context, List<Question> questions) {
         this.context = context;

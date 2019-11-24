@@ -3,6 +3,8 @@
     package="com.example.pockethandyman">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:name=".Globals"
@@ -50,6 +52,15 @@
                 android:value=".HomeActivity" />
         </activity>
         <activity android:name=".ButtonActivity" />
+        <activity
+            android:name=".AnswerQuestionActivity"
+            android:label="Answer Question"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ButtonActivity" />
+        </activity>
         <activity
             android:name=".AnswerActivity"
             android:label="">

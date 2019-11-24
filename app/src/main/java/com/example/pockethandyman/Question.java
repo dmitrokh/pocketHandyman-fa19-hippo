@@ -52,6 +52,10 @@ public class Question implements Serializable {
         this.tags = tags;
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
     public String getAuthor() {
         return author;
     }

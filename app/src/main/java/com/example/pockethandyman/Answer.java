@@ -3,6 +3,7 @@ package com.example.pockethandyman;
 import java.io.Serializable;
 
 public class Answer implements Serializable {
+
     public String answerText;
     public String author;
 

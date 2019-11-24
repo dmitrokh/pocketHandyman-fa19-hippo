@@ -44,7 +44,6 @@ public class UnansweredQuestionsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         adapter = new UnansweredQuestionsAdapter(getActivity(), questionsForTask);
         recyclerView.setAdapter(adapter);
         return view;
