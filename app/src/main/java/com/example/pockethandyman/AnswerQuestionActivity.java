@@ -1,13 +1,10 @@
 package com.example.pockethandyman;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,16 +18,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.chip.Chip;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
-
-import io.opencensus.internal.Utils;
 
 public class AnswerQuestionActivity extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 1;
@@ -43,6 +44,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     private DatabaseReference dbReference;
     private Question question;
     private Globals globalVars;
+    StorageReference storageRef;
+    StorageReference videoRef;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_answer_question);
 
         globalVars = (Globals) getApplicationContext();
+
         question = (Question) getIntent().getSerializableExtra("question");
 
         ActionBar actionBar = getSupportActionBar();
@@ -98,11 +102,78 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            Uri videoUri = intent.getData();
+//        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+//            Uri videoUri = intent.getData();
+//
+//            System.out.println();
+//        }
 
-            System.out.println();
+        // After camera screen this code will execute
+        if (requestCode == REQUEST_VIDEO_CAPTURE ) {
+
+            if (resultCode == RESULT_OK) {
+                Uri videoUri = intent.getData();
+
+                // Create a media file name
+                // For unique file name appending current timeStamp with file name
+                java.util.Date date= new java.util.Date();
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(date.getTime());
+                String videoName = globalVars.getCurUser() +  "_" + timeStamp;
+
+//                dbReference = FirebaseDatabase.getInstance().getReference("videos");
+//                dbReference.child(videoName).setValue(toAsk);
+
+                storageRef = FirebaseStorage.getInstance().getReference();
+                videoRef = storageRef.child("/videos/" + videoName);
+
+                uploadData(videoUri);
+
+                // Video captured and saved to fileUri specified in the Intent
+                Toast.makeText(AnswerQuestionActivity.this, "Video saved to: " + intent.getData(), Toast.LENGTH_LONG).show();
+
+            } else if (resultCode == RESULT_CANCELED) {
+
+                // User cancelled the video capture
+                Toast.makeText(AnswerQuestionActivity.this, "User cancelled the video capture.", Toast.LENGTH_LONG).show();
+
+            } else {
+                // Video capture failed, advise user
+                Toast.makeText(AnswerQuestionActivity.this, "Video capture failed.", Toast.LENGTH_LONG).show();
+            }
         }
+    }
+
+
+    private void uploadData(Uri videoUri) {
+        if(videoUri != null){
+            UploadTask uploadTask = videoRef.putFile(videoUri);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AnswerQuestionActivity.this,
+                            "Upload failed: " + e.getLocalizedMessage(),
+                            Toast.LENGTH_LONG).show();
+
+                }
+            }).addOnSuccessListener(
+                    new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(AnswerQuestionActivity.this, "Upload complete",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(
+                    new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    });
+        }else {
+            Toast.makeText(AnswerQuestionActivity.this, "Nothing to upload", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
