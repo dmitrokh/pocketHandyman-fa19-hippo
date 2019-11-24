@@ -48,7 +48,7 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<ViewHolder> {
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
-                R.layout.fragment_item, viewGroup, false);
+                R.layout.item_unanswered_question, viewGroup, false);
         ViewHolder mainHolder = new ViewHolder(mainGroup) {
             @Override
             public String toString() {

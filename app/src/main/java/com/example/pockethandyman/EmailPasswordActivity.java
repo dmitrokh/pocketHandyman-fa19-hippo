@@ -28,6 +28,7 @@ public class EmailPasswordActivity extends AppCompatActivity implements
     private EditText mEmailField;
     private EditText mPasswordField;
     public ProgressDialog mProgressDialog;
+    private Globals globalVars;
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -37,6 +38,8 @@ public class EmailPasswordActivity extends AppCompatActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_password);
+
+        globalVars = (Globals) getApplicationContext();
 
         // Views
         mStatusTextView = findViewById(R.id.status);
@@ -118,6 +121,9 @@ public class EmailPasswordActivity extends AppCompatActivity implements
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 //                            updateUI(user);
+
+                            String userName = user.getEmail().split("@")[0];
+                            globalVars.setCurUser(userName);
 
                             Intent intent = new Intent(EmailPasswordActivity.this, HomeActivity.class);
                             startActivity(intent);

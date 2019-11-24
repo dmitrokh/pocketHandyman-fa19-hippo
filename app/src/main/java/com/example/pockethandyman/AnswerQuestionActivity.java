@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,14 +30,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import io.opencensus.internal.Utils;
+
 public class AnswerQuestionActivity extends AppCompatActivity {
+    static final int REQUEST_VIDEO_CAPTURE = 1;
+
     private TextView questionTextView;
-    private ImageButton recordVideo;
+    private ImageButton recordVideoButton;
     private EditText answerField;
     private Button publishButton;
     private BottomNavigationView bottomNavigationView;
     private DatabaseReference dbReference;
-    private String question;
+    private Question question;
     private Globals globalVars;
 
     @Override
@@ -44,16 +50,28 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_answer_question);
 
         globalVars = (Globals) getApplicationContext();
+        question = (Question) getIntent().getSerializableExtra("question");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
 
         questionTextView = findViewById(R.id.questionField);
-        recordVideo = findViewById(R.id.imageButton2);
+        recordVideoButton = findViewById(R.id.imageButton2);
         answerField = findViewById(R.id.answerField);
+        publishButton = findViewById(R.id.publishButton);
 
-        question = getIntent().getStringExtra("Question");
+        questionTextView.setText(question.getQuestion());
+
+        recordVideoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+                }
+            }
+        });
 
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +92,26 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         });
 
         setupBottomNavigationView();
+        setActionBar(question);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+            Uri videoUri = intent.getData();
+
+            System.out.println();
+        }
+    }
+
+
+    private void setActionBar(Question question) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(question.getCategory());
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 

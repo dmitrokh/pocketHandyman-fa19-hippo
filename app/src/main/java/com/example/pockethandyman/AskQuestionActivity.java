@@ -43,11 +43,14 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
     private DatabaseReference dbReference;
     private ChipGroup chipGroup;
     private EditText tagField;
+    private Globals globalVars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
+
+        globalVars = (Globals) getApplicationContext();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
@@ -108,8 +111,10 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                     String question = questionField.getText().toString();
                     int hash = question.hashCode();
 //                    String hashString = String.valueOf(hash);
-                    // TODO: SET AUTHOR
-                    Question toAsk = new Question(question, categoryChosen, null);
+
+                    String userName = globalVars.getCurUser();
+
+                    Question toAsk = new Question(question, categoryChosen, userName);
 
                     List<String> tags = new ArrayList<>();
                     for (int i = 0; i < chipGroup.getChildCount(); i++) {

@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
                     String question = "",
                             category = "";
 
-                    ArrayList<Answer> answers = null;
+                    ArrayList<Answer> answers = new ArrayList<>();
                     ArrayList<String> tags = null;
 
                     DataSnapshot questionSnapshot = ds.child("question");
@@ -57,8 +57,17 @@ public class HomeActivity extends AppCompatActivity {
 
                     if (ds.hasChild("answers")) {
                         DataSnapshot answersSnapshot = ds.child("answers");
-                        answers = (ArrayList<Answer>)answersSnapshot.getValue();
+                        // Get each answer from the question
+                        for (DataSnapshot childSnapshot : answersSnapshot.getChildren()) {
+                            Answer answer = childSnapshot.getValue(Answer.class);
+                            answers.add(answer);
+                        }
+
                         q.setAnswers(answers);
+
+//                        DataSnapshot answersSnapshot = ds.child("answers");
+//                        answers = (ArrayList<Answer>)answersSnapshot.getValue();
+//                        q.setAnswers(answers);
                     }
 
                     if (ds.hasChild("tags")) {

@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 public class Globals extends Application {
+    private String curUser;
     private HashMap<Integer, Question> allQuestions = new HashMap<>();
 
     public HashMap<Integer, Question> getAllQuestions() {
@@ -16,7 +17,15 @@ public class Globals extends Application {
         this.allQuestions = allQuestions;
     }
 
-//    public void retrieveQuestionsFromDB(DataSnapshot allQuestionsSnapshot) {
+    public String getCurUser() {
+        return curUser;
+    }
+
+    public void setCurUser(String curUser) {
+        this.curUser = curUser;
+    }
+
+    //    public void retrieveQuestionsFromDB(DataSnapshot allQuestionsSnapshot) {
 //        for (DataSnapshot ds : allQuestionsSnapshot.getChildren()) {
 //            final String question = ds.child("question").getValue(String.class);
 //            final String category = ds.child("category").getValue(String.class);
