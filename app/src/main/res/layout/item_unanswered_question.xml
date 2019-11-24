@@ -16,22 +16,12 @@
     android:orientation="vertical">
 
         <TextView
-            android:id="@+id/cardTitle"
+            android:id="@+id/questionTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:textColor="#000000"
             android:textSize="17sp" />
-
-        <Button
-            android:id="@+id/answerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@drawable/custom_button2"
-            android:text="Answer"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="5dp"/>
 
     </LinearLayout>
 

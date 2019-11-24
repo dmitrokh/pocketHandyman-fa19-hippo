@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,16 +15,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Activity that handles displaying the questions for a specified category
+ */
 public class ButtonActivity extends AppCompatActivity {
     private static final String TAG = "ButtonActivity";
     String taskName = null;
@@ -34,7 +32,6 @@ public class ButtonActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private Globals globalVars;
-    private ArrayList<Question> questionsForTask = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,10 +42,10 @@ public class ButtonActivity extends AppCompatActivity {
 
         taskName = getIntent().getStringExtra("ActivityName");
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);//setting tab over viewpager
 
         //Implementing tab selected listener over tablayout
@@ -79,16 +76,29 @@ public class ButtonActivity extends AppCompatActivity {
     }
 
 
-    private void getQuestionsForTask() {
+    // Get all questions for the current category, and split by answered/unanswered
+    private HashMap<String, List<Question>> getQuestionsForTask() {
         HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
 
-        for (Integer hash : allQuestions.keySet()) {
-            Question question = allQuestions.get(hash);
+        ArrayList<Question> unansweredQuestions = new ArrayList<>();
+        ArrayList<Question> answeredQuestions = new ArrayList<>();
+
+        for (int hashOfQuestion : allQuestions.keySet()) {
+            Question question = allQuestions.get(hashOfQuestion);
 
             if (question.getCategory().equals(taskName)) {
-                questionsForTask.add(question);
+                if (question.getAnswers().size() == 0) {
+                    unansweredQuestions.add(question);
+                } else {
+                    answeredQuestions.add(question);
+                }
             }
         }
+
+        HashMap<String, List<Question>> questions = new HashMap<>();
+        questions.put("unanswered", unansweredQuestions);
+        questions.put("answered", answeredQuestions);
+        return questions;
     }
 
 
@@ -96,10 +106,12 @@ public class ButtonActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        getQuestionsForTask();
+        Map<String, List<Question>> questions = getQuestionsForTask();
 
-        adapter.addFrag(new AnswerFragment("Unanswered questions", taskName, questionsForTask), "Unanswered");
-        adapter.addFrag(new AnswerFragment("Answered questions", taskName, questionsForTask), "Answered");
+        adapter.addFrag(new UnansweredQuestionsFragment("Unanswered questions", taskName,
+                questions.get("unanswered")), "Unanswered");
+        adapter.addFrag(new AnsweredQuestionsFragment("Answered questions", taskName,
+                questions.get("answered")), "Answered");
         viewPager.setAdapter(adapter);
     }
 

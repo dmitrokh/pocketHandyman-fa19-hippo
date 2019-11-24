@@ -26,21 +26,17 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        this.questionTextView = (TextView) itemView.findViewById(R.id.cardTitle);
-        this.answerButton = itemView.findViewById(R.id.answerButton);
+        this.questionTextView = (TextView) itemView.findViewById(R.id.questionTitle);
 
-        answerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), AnswerQuestionActivity.class);
-                intent.putExtra("Question",  question);
-                v.getContext().startActivity(intent);
-            }
-        });
-
+//        this.answerButton = itemView.findViewById(R.id.answerButton);
+//        answerButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent (v.getContext(), AnswerQuestionActivity.class);
+//                intent.putExtra("Question",  question);
+//                v.getContext().startActivity(intent);
+//            }
+//        });
     }
-
-
-
 }
 
