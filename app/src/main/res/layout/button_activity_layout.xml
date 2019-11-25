@@ -10,39 +10,40 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/edittext_background"
         android:focusableInTouchMode="false"
+        android:hint="    Search for a question..."
         android:textCursorDrawable="@color/colorPrimary"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="    Search a question"
-        tools:textColor="#807E7E">
-    </EditText>
+        tools:text="    Search for a question..."
+        tools:textColor="#807E7E"></EditText>
 
 
     <ImageView
         android:id="@+id/magnifying_glass"
         android:layout_width="31dp"
         android:layout_height="31dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintTop_toTopOf="@+id/editText"
-        app:srcCompat="@drawable/magnifying_glass" />
+        app:srcCompat="@drawable/magnifying_glass_2" />
 
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="57dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
