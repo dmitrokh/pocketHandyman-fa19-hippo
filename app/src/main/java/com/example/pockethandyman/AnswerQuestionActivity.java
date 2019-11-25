@@ -5,13 +5,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +28,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
@@ -46,6 +51,9 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     private Globals globalVars;
     StorageReference storageRef;
     StorageReference videoRef;
+    private ProgressBar pBar;
+    private String videoFileName;
+    private Uri videoUri;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +72,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         recordVideoButton = findViewById(R.id.imageButton2);
         answerField = findViewById(R.id.answerField);
         publishButton = findViewById(R.id.publishButton);
+        pBar = findViewById(R.id.progressBar);
 
         questionTextView.setText(question.getQuestion());
 
@@ -80,18 +89,29 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Answer newAnswer = new Answer();
+                if (TextUtils.isEmpty(answerField.getText().toString())){
+                    Toast.makeText(
+                            AnswerQuestionActivity.this, "Enter your answer!",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Answer newAnswer = new Answer();
+                    newAnswer.author = globalVars.getCurUser();
+                    newAnswer.answerText = answerField.getText().toString();
+                    // videoUri could be null?
+                    newAnswer.videoUri = videoUri;
 
-                HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
-                Question questionBeingAnswered = allQuestions.get(question.hashCode());
+                    HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
+                    String questionText = question.getQuestion();
+                    Question questionBeingAnswered = allQuestions.get(questionText.hashCode());
 
-                questionBeingAnswered.getAnswers().add(newAnswer);
+                    questionBeingAnswered.getAnswers().add(newAnswer);
 
-                dbReference = FirebaseDatabase.getInstance().getReference("questions");
-                dbReference.child(String.valueOf(question.hashCode())).setValue(questionBeingAnswered);
+                    dbReference = FirebaseDatabase.getInstance().getReference("questions");
+                    dbReference.child(String.valueOf(questionText.hashCode())).setValue(questionBeingAnswered);
 
-//                Intent intent = new Intent(AskQuestionActivity.this, EmailPasswordActivity.class);
-//                startActivity(intent);
+                    Intent intent = new Intent(AnswerQuestionActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -102,29 +122,20 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-//            Uri videoUri = intent.getData();
-//
-//            System.out.println();
-//        }
-
         // After camera screen this code will execute
         if (requestCode == REQUEST_VIDEO_CAPTURE ) {
 
             if (resultCode == RESULT_OK) {
-                Uri videoUri = intent.getData();
+                videoUri = intent.getData();
 
                 // Create a media file name
                 // For unique file name appending current timeStamp with file name
                 java.util.Date date= new java.util.Date();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(date.getTime());
-                String videoName = globalVars.getCurUser() +  "_" + timeStamp;
-
-//                dbReference = FirebaseDatabase.getInstance().getReference("videos");
-//                dbReference.child(videoName).setValue(toAsk);
+                videoFileName = globalVars.getCurUser() +  "_" + timeStamp;
 
                 storageRef = FirebaseStorage.getInstance().getReference();
-                videoRef = storageRef.child("/videos/" + videoName);
+                videoRef = storageRef.child("/videos/" + videoFileName);
 
                 uploadData(videoUri);
 
@@ -163,17 +174,30 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                             Toast.makeText(AnswerQuestionActivity.this, "Upload complete",
                                     Toast.LENGTH_LONG).show();
                         }
-                    }).addOnProgressListener(
+            }).addOnProgressListener(
                     new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
+                            updateProgress(taskSnapshot);
+                            pBar.setVisibility(View.INVISIBLE);
                         }
                     });
         }else {
             Toast.makeText(AnswerQuestionActivity.this, "Nothing to upload", Toast.LENGTH_SHORT).show();
         }
+    }
 
+
+    public void updateProgress(UploadTask.TaskSnapshot taskSnapshot) {
+        @SuppressWarnings("VisibleForTests") long fileSize = taskSnapshot.getTotalByteCount();
+
+        @SuppressWarnings("VisibleForTests")
+        long uploadBytes = taskSnapshot.getBytesTransferred();
+
+        long progress = (100 * uploadBytes) / fileSize;
+
+        pBar.setVisibility(View.VISIBLE);
+        pBar.setProgress((int) progress);
     }
 
 
@@ -214,4 +238,40 @@ public class AnswerQuestionActivity extends AppCompatActivity {
             }
         });
     }
+
+
+//    public void downloadVideo() {
+//
+//        try {
+//            final File localFile = File.createTempFile(videoFileName, "mp4");
+//
+//            videoRef.getFile(localFile).addOnSuccessListener(
+//                    new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(
+//                                FileDownloadTask.TaskSnapshot taskSnapshot) {
+//
+//                            Toast.makeText(AnswerQuestionActivity.this, "Download complete",
+//                                    Toast.LENGTH_LONG).show();
+//
+//                            final VideoView videoView =
+//                                    (VideoView) findViewById(R.id.videoView);
+//                            videoView.setVideoURI(Uri.fromFile(localFile));
+//                            videoView.start();
+//
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(AnswerQuestionActivity.this,
+//                            "Download failed: " + e.getLocalizedMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            });
+//        } catch (Exception e) {
+//            Toast.makeText(AnswerQuestionActivity.this,
+//                    "Failed to create temp file: " + e.getLocalizedMessage(),
+//                    Toast.LENGTH_LONG).show();
+//        }
+//    }
 }
