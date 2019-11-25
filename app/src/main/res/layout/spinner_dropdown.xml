@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:textSize="20sp"
+    android:textSize="24sp"
     android:textColor="@color/colorPrimaryDark"
     android:backgroundTint="#55AB55"/>
