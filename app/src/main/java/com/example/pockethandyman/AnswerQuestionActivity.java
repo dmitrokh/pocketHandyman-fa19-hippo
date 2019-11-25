@@ -98,7 +98,11 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     newAnswer.author = globalVars.getCurUser();
                     newAnswer.answerText = answerField.getText().toString();
                     // videoUri could be null?
-                    newAnswer.videoUri = videoUri;
+                    if (videoUri != null) {
+                        newAnswer.videoUriString = videoUri.toString();
+                    } else {
+                        newAnswer.videoUriString = "";
+                    }
 
                     HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
                     String questionText = question.getQuestion();

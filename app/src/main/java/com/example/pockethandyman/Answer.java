@@ -8,7 +8,7 @@ public class Answer implements Serializable {
 
     public String answerText;
     public String author;
-    public Uri videoUri;
+    public String videoUriString;
 
     // other potential fields: comments, upvotes?
 
@@ -16,9 +16,9 @@ public class Answer implements Serializable {
 
     }
 
-    public Answer(String answerText, String author, Uri videoUri) {
+    public Answer(String answerText, String author, String videoUriString) {
         this.answerText = answerText;
         this.author = author;
-        this.videoUri = videoUri;
+        this.videoUriString = videoUriString;
     }
 }
