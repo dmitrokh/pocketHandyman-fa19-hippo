@@ -17,4 +17,5 @@
         <item>Automotive</item>
         <item>Home Repairs</item>
     </string-array>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
 </resources>

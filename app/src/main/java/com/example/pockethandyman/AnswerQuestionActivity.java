@@ -205,9 +205,9 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.navigation_account:
-                        // TODO: implement account activity
-//                        intent = new Intent(HomeActivity.this, AccountAcitvity.class);
-//                        startActivity(intent);
+                        intent = new Intent(AnswerQuestionActivity.this, UserProfileActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         break;
                 }
                 return true;
