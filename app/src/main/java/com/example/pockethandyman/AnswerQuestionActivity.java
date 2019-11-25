@@ -51,7 +51,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     private Globals globalVars;
     StorageReference storageRef;
     StorageReference videoRef;
-    private VideoView mVideoView;
     private ProgressBar pBar;
     private String videoFileName;
     private Uri videoUri;
@@ -90,15 +89,15 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Answer newAnswer = new Answer();
-                newAnswer.author = globalVars.getCurUser();
-
                 if (TextUtils.isEmpty(answerField.getText().toString())){
                     Toast.makeText(
                             AnswerQuestionActivity.this, "Enter your answer!",
                             Toast.LENGTH_SHORT).show();
                 } else {
+                    Answer newAnswer = new Answer();
+                    newAnswer.author = globalVars.getCurUser();
                     newAnswer.answerText = answerField.getText().toString();
+                    // videoUri could be null?
                     newAnswer.videoUri = videoUri;
 
                     HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
@@ -108,7 +107,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     questionBeingAnswered.getAnswers().add(newAnswer);
 
                     dbReference = FirebaseDatabase.getInstance().getReference("questions");
-                    dbReference.child(String.valueOf(question.hashCode())).setValue(questionBeingAnswered);
+                    dbReference.child(String.valueOf(questionText.hashCode())).setValue(questionBeingAnswered);
 
                     Intent intent = new Intent(AnswerQuestionActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -123,12 +122,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-//            Uri videoUri = intent.getData();
-//
-//            System.out.println();
-//        }
-
         // After camera screen this code will execute
         if (requestCode == REQUEST_VIDEO_CAPTURE ) {
 
@@ -145,7 +138,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                 videoRef = storageRef.child("/videos/" + videoFileName);
 
                 uploadData(videoUri);
-                downloadVideo();
 
                 // Video captured and saved to fileUri specified in the Intent
                 Toast.makeText(AnswerQuestionActivity.this, "Video saved to: " + intent.getData(), Toast.LENGTH_LONG).show();
@@ -159,42 +151,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                 // Video capture failed, advise user
                 Toast.makeText(AnswerQuestionActivity.this, "Video capture failed.", Toast.LENGTH_LONG).show();
             }
-        }
-    }
-
-
-    public void downloadVideo() {
-
-        try {
-            final File localFile = File.createTempFile(videoFileName, "mp4");
-
-            videoRef.getFile(localFile).addOnSuccessListener(
-                    new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(
-                                FileDownloadTask.TaskSnapshot taskSnapshot) {
-
-                            Toast.makeText(AnswerQuestionActivity.this, "Download complete",
-                                    Toast.LENGTH_LONG).show();
-
-                            final VideoView videoView =
-                                    (VideoView) findViewById(R.id.videoView);
-                            videoView.setVideoURI(Uri.fromFile(localFile));
-                            videoView.start();
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AnswerQuestionActivity.this,
-                            "Download failed: " + e.getLocalizedMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-            });
-        } catch (Exception e) {
-            Toast.makeText(AnswerQuestionActivity.this,
-                    "Failed to create temp file: " + e.getLocalizedMessage(),
-                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -229,7 +185,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         }else {
             Toast.makeText(AnswerQuestionActivity.this, "Nothing to upload", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 
@@ -283,4 +238,40 @@ public class AnswerQuestionActivity extends AppCompatActivity {
             }
         });
     }
+
+
+//    public void downloadVideo() {
+//
+//        try {
+//            final File localFile = File.createTempFile(videoFileName, "mp4");
+//
+//            videoRef.getFile(localFile).addOnSuccessListener(
+//                    new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(
+//                                FileDownloadTask.TaskSnapshot taskSnapshot) {
+//
+//                            Toast.makeText(AnswerQuestionActivity.this, "Download complete",
+//                                    Toast.LENGTH_LONG).show();
+//
+//                            final VideoView videoView =
+//                                    (VideoView) findViewById(R.id.videoView);
+//                            videoView.setVideoURI(Uri.fromFile(localFile));
+//                            videoView.start();
+//
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(AnswerQuestionActivity.this,
+//                            "Download failed: " + e.getLocalizedMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            });
+//        } catch (Exception e) {
+//            Toast.makeText(AnswerQuestionActivity.this,
+//                    "Failed to create temp file: " + e.getLocalizedMessage(),
+//                    Toast.LENGTH_LONG).show();
+//        }
+//    }
 }

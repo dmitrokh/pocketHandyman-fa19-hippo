@@ -126,7 +126,7 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                     dbReference.child(String.valueOf(hash)).setValue(toAsk);
                 }
 
-                Intent intent = new Intent(AskQuestionActivity.this, EmailPasswordActivity.class);
+                Intent intent = new Intent(AskQuestionActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
