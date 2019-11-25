@@ -209,13 +209,12 @@ public class EmailPasswordActivity extends AppCompatActivity implements
         if (user != null) {
             String emailVerified = "Email User: " + user.getEmail() + " verified " + user.isEmailVerified();
             mStatusTextView.setText(emailVerified);
-//            String userUid = "Firebase User: " + user.getUid();
-//            mDetailTextView.setText(userUid);
 
+//            String userUid = "Firebase User: " + user.getUid();
+////            mDetailTextView.setText(userUid);
 //            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
 //            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
 //            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
-//
 //            findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
 
             Intent intent = new Intent(EmailPasswordActivity.this, HomeActivity.class);
