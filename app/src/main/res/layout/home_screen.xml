@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFBF8"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     tools:context=".HomeActivity">
@@ -14,54 +13,53 @@
         android:layout_width="261dp"
         android:layout_height="83dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/app_name_orange" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/pocket_hand"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="105dp"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginStart="35dp"-->
-<!--        android:layout_marginTop="60dp"-->
-<!--        android:layout_marginEnd="35dp"-->
-<!--        android:gravity="center_horizontal|top"-->
-<!--        android:text="POCKET HANDYMAN"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Display3"-->
-<!--        android:textColor="#EFA413"-->
-<!--        android:textSize="45sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/pocket_hand"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="105dp"-->
+    <!--        android:layout_alignParentLeft="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_marginStart="35dp"-->
+    <!--        android:layout_marginTop="60dp"-->
+    <!--        android:layout_marginEnd="35dp"-->
+    <!--        android:gravity="center_horizontal|top"-->
+    <!--        android:text="POCKET HANDYMAN"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Display3"-->
+    <!--        android:textColor="#EFA413"-->
+    <!--        android:textSize="45sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/edittext_background"
-        android:hint="Search a question"
+        android:hint="Search for a question..."
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pocket_hand"/>
-<!--    android:background="@drawable/edittext_background"-->
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/Office_electronics"
+        app:layout_constraintStart_toStartOf="@+id/Home_appliance_button"
+        app:layout_constraintTop_toBottomOf="@+id/pocket_hand" />
+    <!--    android:background="@drawable/edittext_background"-->
 
     <ImageView
         android:id="@+id/magnifying_glass"
         android:layout_width="31dp"
-        android:layout_height="31dp"
+        android:layout_height="20dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="@+id/editText"
@@ -70,63 +68,70 @@
 
     <Button
         android:id="@+id/Home_appliance_button"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/home_appliance_button_background"
         android:text="@string/Home_Appliances"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <Button
         android:id="@+id/Automotive"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/automotive_background"
         android:text="@string/Automotive"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Home_appliance_button" />
 
     <Button
         android:id="@+id/Home_Repairs"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/home_repairs_background"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/Home_repairs"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textColorLink="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/Office_electronics" />
 
     <Button
         android:id="@+id/Office_electronics"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/office_electronics_background"
         android:text="@string/Office_electronics"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFBFB"
         android:textColorHighlight="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editText" />

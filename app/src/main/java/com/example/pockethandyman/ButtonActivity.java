@@ -96,8 +96,9 @@ public class ButtonActivity extends AppCompatActivity {
         }
 
         HashMap<String, List<Question>> questions = new HashMap<>();
-        questions.put("unanswered", unansweredQuestions);
         questions.put("answered", answeredQuestions);
+        questions.put("unanswered", unansweredQuestions);
+
         return questions;
     }
 
