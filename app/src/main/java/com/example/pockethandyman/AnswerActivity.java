@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -39,8 +40,11 @@ public class AnswerActivity extends AppCompatActivity {
 
         Question question = (Question) getIntent().getSerializableExtra("question");
         List<Answer> answers = question.getAnswers();
-        RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers);
+        RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers, this);
         answersRecyclerView.setAdapter(answerAdapter);
+
+        TextView questionTitle = findViewById(R.id.questionTitle);
+        questionTitle.setText(question.getQuestion());
 
         setupBottomNavigationView();
         setActionBar(question);

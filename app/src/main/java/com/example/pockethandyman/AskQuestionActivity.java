@@ -126,7 +126,7 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                     dbReference.child(String.valueOf(hash)).setValue(toAsk);
                 }
 
-                Intent intent = new Intent(AskQuestionActivity.this, EmailPasswordActivity.class);
+                Intent intent = new Intent(AskQuestionActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -162,9 +162,9 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                         // do nothing: you're already at ask question
                         break;
                     case R.id.navigation_account:
-                        // TODO: implement account activity
-//                        intent = new Intent(HomeActivity.this, AccountAcitvity.class);
-//                        startActivity(intent);
+                        intent = new Intent(AskQuestionActivity.this, UserProfileActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         break;
                 }
                 return true;

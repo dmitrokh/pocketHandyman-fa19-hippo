@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
                             category = "";
 
                     ArrayList<Answer> answers = new ArrayList<>();
-                    ArrayList<String> tags = null;
+                    ArrayList<String> tags = new ArrayList<>();
 
                     DataSnapshot questionSnapshot = ds.child("question");
                     question = (String)questionSnapshot.getValue();
@@ -62,19 +62,17 @@ public class HomeActivity extends AppCompatActivity {
                             Answer answer = childSnapshot.getValue(Answer.class);
                             answers.add(answer);
                         }
-
-                        q.setAnswers(answers);
-
 //                        DataSnapshot answersSnapshot = ds.child("answers");
 //                        answers = (ArrayList<Answer>)answersSnapshot.getValue();
 //                        q.setAnswers(answers);
                     }
+                    q.setAnswers(answers);
 
                     if (ds.hasChild("tags")) {
                         DataSnapshot tagsSnapshot = ds.child("tags");
                         tags = (ArrayList<String>)tagsSnapshot.getValue();
-                        q.setTags(tags);
                     }
+                    q.setTags(tags);
 
                     int hashOfQuestionString = question.hashCode();
                     allQuestions.put(hashOfQuestionString, q);
@@ -167,9 +165,9 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.navigation_account:
-                        // TODO: implement account activity
-//                        intent = new Intent(HomeActivity.this, AccountAcitvity.class);
-//                        startActivity(intent);
+                        intent = new Intent(HomeActivity.this, UserProfileActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         break;
                 }
                 return true;

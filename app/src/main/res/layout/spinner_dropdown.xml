@@ -4,7 +4,7 @@
     android:singleLine="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:textSize="20sp"
+    android:gravity="center_vertical"
+    android:textSize="18sp"
     android:textColor="@color/colorPrimaryDark"
     android:backgroundTint="#55AB55"/>
