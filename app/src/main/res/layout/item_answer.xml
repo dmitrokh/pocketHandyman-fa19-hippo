@@ -24,4 +24,10 @@
         android:text="This is some answer to a question"
         android:textColor="#000000"
         tools:text="This is some answer to a question" />
+
+    <VideoView
+        android:id="@+id/answerVideo"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
