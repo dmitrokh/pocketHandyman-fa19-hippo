@@ -24,4 +24,9 @@
         android:text="This is some answer to a question"
         android:textColor="#000000"
         tools:text="This is some answer to a question" />
+
+    <VideoView
+        android:id="@+id/answerVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

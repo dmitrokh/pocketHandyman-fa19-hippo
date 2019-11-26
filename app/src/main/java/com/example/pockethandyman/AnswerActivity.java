@@ -39,7 +39,7 @@ public class AnswerActivity extends AppCompatActivity {
 
         Question question = (Question) getIntent().getSerializableExtra("question");
         List<Answer> answers = question.getAnswers();
-        RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers);
+        RecyclerView.Adapter answerAdapter = new AnswerAdapter(answers, this);
         answersRecyclerView.setAdapter(answerAdapter);
 
         setupBottomNavigationView();
