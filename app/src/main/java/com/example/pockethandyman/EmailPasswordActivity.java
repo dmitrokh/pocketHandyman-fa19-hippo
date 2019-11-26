@@ -66,8 +66,10 @@ public class EmailPasswordActivity extends AppCompatActivity implements
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        String userName = currentUser.getEmail().split("@")[0];
-        globalVars.setCurUser(userName);
+        if (currentUser != null) {
+            String userName = currentUser.getEmail().split("@")[0];
+            globalVars.setCurUser(userName);
+        }
     }
     // [END on_start_check_user]
 
