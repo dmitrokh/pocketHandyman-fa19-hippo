@@ -1,13 +1,13 @@
 package com.example.pockethandyman;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
+import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -76,14 +76,32 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             videoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                    MediaController mc = new MediaController(context);
-//                    holder.answerVideo.setMediaController(mc);
-                    holder.answerVideo.setVideoPath(localFile.getAbsolutePath());
-//                    holder.answerVideo.setVideoURI(Uri.fromFile(localFile));
+                    final VideoView videoView = holder.answerVideo;
+                    videoView.setVideoPath(localFile.getAbsolutePath());
                     Log.e("adapter", "set file uri");
-//                    holder.answerVideo.setZOrderOnTop(true);
-//                    holder.answerVideo.setBackgroundColor(Color.TRANSPARENT);
-                    holder.answerVideo.start();
+//                    holder.answerVideo.start();
+                    videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            double videoWidth = mp.getVideoWidth();
+                            double videoHeight = mp.getVideoHeight();
+                            Log.e("adapter", String.format("%f %f", videoWidth, videoHeight));
+
+                            Display display = ((AnswerActivity) context).getWindowManager().getDefaultDisplay();
+                            Point size = new Point();
+                            display.getSize(size);
+                            int displayWidth = size.x;
+                            int displayHeight = (int) (videoHeight / videoWidth * displayWidth);
+                            Log.e("adapter", String.format("%d %d", displayWidth, displayHeight));
+
+                            ViewGroup.LayoutParams layout = videoView.getLayoutParams();
+                            layout.width = displayWidth;
+                            layout.height = displayHeight;
+                            videoView.setLayoutParams(layout);
+
+                            videoView.start();
+                        }
+                    });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
