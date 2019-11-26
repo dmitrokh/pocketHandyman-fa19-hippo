@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -75,10 +76,13 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             videoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    holder.answerVideo.setVideoURI(Uri.fromFile(localFile));
+//                    MediaController mc = new MediaController(context);
+//                    holder.answerVideo.setMediaController(mc);
+                    holder.answerVideo.setVideoPath(localFile.getAbsolutePath());
+//                    holder.answerVideo.setVideoURI(Uri.fromFile(localFile));
                     Log.e("adapter", "set file uri");
 //                    holder.answerVideo.setZOrderOnTop(true);
-                    holder.answerVideo.setBackgroundColor(Color.TRANSPARENT);
+//                    holder.answerVideo.setBackgroundColor(Color.TRANSPARENT);
                     holder.answerVideo.start();
                 }
             }).addOnFailureListener(new OnFailureListener() {
