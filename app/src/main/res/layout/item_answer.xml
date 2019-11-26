@@ -52,4 +52,5 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         tools:text="This is some answer to a question. This is an answer. This is an answer. " />
+
 </LinearLayout>
