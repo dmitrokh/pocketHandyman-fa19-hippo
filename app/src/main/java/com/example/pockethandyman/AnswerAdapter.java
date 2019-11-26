@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ import java.util.List;
  * Adapter to handle answers in the RecyclerView under a question
  */
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
+
+    private final int MAX_VIDEO_HEIGHT = 600;
+    private final int MAX_VIDEO_WIDTH = 600;
 
     private List<Answer> answers;
     private Context context;
@@ -72,27 +76,26 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             final File localFile = File.createTempFile(videoFileName, "mp4");
 
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference videoRef = storageRef.child("/videos/" + videoFileName);
+            final StorageReference videoRef = storageRef.child("/videos/" + videoFileName);
             videoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     final VideoView videoView = holder.answerVideo;
                     videoView.setVideoPath(localFile.getAbsolutePath());
                     Log.e("adapter", "set file uri");
-//                    holder.answerVideo.start();
                     videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
                         public void onPrepared(MediaPlayer mp) {
                             double videoWidth = mp.getVideoWidth();
                             double videoHeight = mp.getVideoHeight();
-                            Log.e("adapter", String.format("%f %f", videoWidth, videoHeight));
-
-                            Display display = ((AnswerActivity) context).getWindowManager().getDefaultDisplay();
-                            Point size = new Point();
-                            display.getSize(size);
-                            int displayWidth = size.x;
-                            int displayHeight = (int) (videoHeight / videoWidth * displayWidth);
-                            Log.e("adapter", String.format("%d %d", displayWidth, displayHeight));
+                            int displayWidth, displayHeight;
+                            if (videoWidth > videoHeight) {
+                                displayWidth = MAX_VIDEO_WIDTH;
+                                displayHeight = (int) (videoHeight / videoWidth * displayWidth);
+                            } else {
+                                displayHeight = MAX_VIDEO_HEIGHT;
+                                displayWidth = (int) (videoWidth / videoHeight * displayHeight);
+                            }
 
                             ViewGroup.LayoutParams layout = videoView.getLayoutParams();
                             layout.width = displayWidth;
