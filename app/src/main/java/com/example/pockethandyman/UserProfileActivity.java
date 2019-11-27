@@ -18,6 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private EditText screenNameText;
     private String screenName;
     private TextView welcome;
+    private Button signOutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
         screenNameText = (EditText) findViewById(R.id.nameEditText);
         welcome = (TextView) findViewById(R.id.welcome);
+        signOutButton = (Button) findViewById(R.id.signOutButton);
+
 
         screenNameText.addTextChangedListener(new TextWatcher() {
 
@@ -60,6 +64,15 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
 
         }});
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmailPasswordActivity.getInstance().signOut();
+                Intent intent = new Intent(UserProfileActivity.this, EmailPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         setupBottomNavigationView();

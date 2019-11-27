@@ -67,6 +67,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:singleLine="true"
         android:padding="4dp"
         android:background="@drawable/question"
         android:ems="10"
@@ -75,6 +76,29 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/screenName" />
+
+    <TextView
+        android:id="@+id/contributions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Contributions"
+        android:textSize="16dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameEditText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="10dp"
+        android:text="12 Questions Asked, 3 Questions Answered"
+        android:textSize="16dp"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contributions"/>
 
     <Button
         android:id="@+id/signOutButton"
