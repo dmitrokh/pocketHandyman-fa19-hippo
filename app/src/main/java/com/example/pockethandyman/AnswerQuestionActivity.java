@@ -97,12 +97,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     Answer newAnswer = new Answer();
                     newAnswer.author = globalVars.getCurUser();
                     newAnswer.answerText = answerField.getText().toString();
-                    // videoUri could be null?
-                    if (videoUri != null) {
-                        newAnswer.videoUriString = videoUri.toString();
-                    } else {
-                        newAnswer.videoUriString = "";
-                    }
+
+                    newAnswer.videoFileName = videoFileName;
 
                     HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
                     String questionText = question.getQuestion();
@@ -160,6 +156,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
 
     private void uploadData(Uri videoUri) {
+        //gs://pockethandyman-786ef.appspot.com/videos/dmitro.kh_20191127_114118
         if(videoUri != null){
             UploadTask uploadTask = videoRef.putFile(videoUri);
 
