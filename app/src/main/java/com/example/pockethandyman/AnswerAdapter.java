@@ -67,7 +67,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         holder.author.setText(answer.author);
         holder.answerText.setText(answer.answerText);
 
-        String videoFileName = answer.videoUriString;
+        String videoFileName = answer.videoFileName;
         if (videoFileName == null || videoFileName.length() == 0) {
             return;
         }
