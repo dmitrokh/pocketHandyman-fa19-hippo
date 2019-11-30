@@ -155,6 +155,17 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     }
 
 
+    // onOptionsItemSelected is used to go back to previous screen with list of unanswered questions
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return false;
+    }
+
+
     private void uploadData(Uri videoUri) {
         //gs://pockethandyman-786ef.appspot.com/videos/dmitro.kh_20191127_114118
         if(videoUri != null){
