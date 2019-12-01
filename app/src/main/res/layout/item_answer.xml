@@ -37,7 +37,34 @@
             android:text="John Doe"
             android:textSize="18sp"
             tools:text="John Doe" />
+
+
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/upvoteButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="@color/logoColor"
+        android:text="UPVOTE"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/numUpvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+        android:text="0"
+        android:textSize="18sp" />
 
     <VideoView
         android:id="@+id/answerVideo"
