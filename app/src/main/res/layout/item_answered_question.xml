@@ -13,8 +13,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="225dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
         <TextView
             android:id="@+id/questionTitle"
@@ -22,7 +24,6 @@
             android:layout_height="wrap_content"
             android:lineSpacingExtra="4sp"
             android:paddingStart="16dp"
-            android:paddingTop="16dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
             android:textColor="@color/colorPrimaryDark"
@@ -53,18 +54,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/profilePic"
             app:layout_constraintStart_toEndOf="@+id/profilePic"
             app:layout_constraintTop_toTopOf="@+id/profilePic" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="162dp"
-            android:layout_height="83dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/author"
-            app:srcCompat="@drawable/movie_icon" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
