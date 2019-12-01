@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -41,12 +42,17 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         private TextView author;
         private TextView answerText;
         private VideoView answerVideo;
+        private TextView numUpvotes;
+        private Button upvote;
+        boolean isUpvoted = false;
 
         public AnswerViewHolder(View view) {
             super(view);
             author = view.findViewById(R.id.author);
             answerText = view.findViewById(R.id.answerText);
             answerVideo = view.findViewById(R.id.answerVideo);
+            numUpvotes = view.findViewById(R.id.numUpvotes);
+            upvote = view.findViewById(R.id.upvoteButton);
         }
     }
 
@@ -63,9 +69,26 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     @Override
     public void onBindViewHolder(@NonNull final AnswerViewHolder holder, int position) {
-        Answer answer = answers.get(position);
+        final Answer answer = answers.get(position);
+
+
+        holder.upvote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.isUpvoted) {
+                    answer.removeUpvote();
+                } else {
+                    answer.addUpvote();
+                }
+                holder.isUpvoted = !holder.isUpvoted;
+                holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
+            }
+        });
+
         holder.author.setText(answer.author);
         holder.answerText.setText(answer.answerText);
+        holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
+
 
         String videoFileName = answer.videoFileName;
         if (videoFileName == null || videoFileName.length() == 0) {
