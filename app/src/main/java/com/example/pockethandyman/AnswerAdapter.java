@@ -69,6 +69,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
         String videoFileName = answer.videoFileName;
         if (videoFileName == null || videoFileName.length() == 0) {
+            holder.answerVideo.setVisibility(View.GONE);
             return;
         }
 
