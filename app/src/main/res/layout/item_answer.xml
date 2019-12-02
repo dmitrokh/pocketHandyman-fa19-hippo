@@ -66,11 +66,25 @@
         android:text="0"
         android:textSize="18sp" />
 
-    <VideoView
-        android:id="@+id/answerVideo"
+    <FrameLayout
+        android:id="@+id/videoFrame"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="match_parent">
+
+        <VideoView
+            android:id="@+id/answerVideo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:id="@+id/playButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            app:srcCompat="@android:drawable/ic_media_play" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/answerText"
