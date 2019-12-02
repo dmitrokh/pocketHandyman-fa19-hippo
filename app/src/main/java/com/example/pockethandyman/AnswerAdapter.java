@@ -10,6 +10,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -44,6 +47,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         private VideoView answerVideo;
         private TextView numUpvotes;
         private Button upvote;
+        private FrameLayout frame;
+        private ImageButton playButton;
         boolean isUpvoted = false;
 
         public AnswerViewHolder(View view) {
@@ -53,6 +58,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             answerVideo = view.findViewById(R.id.answerVideo);
             numUpvotes = view.findViewById(R.id.numUpvotes);
             upvote = view.findViewById(R.id.upvoteButton);
+            frame = view.findViewById(R.id.videoFrame);
+            playButton = view.findViewById(R.id.playButton);
         }
     }
 
@@ -107,9 +114,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                     final VideoView videoView = holder.answerVideo;
                     videoView.setVideoPath(localFile.getAbsolutePath());
                     Log.e("adapter", "set file uri");
+
                     videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
-                        public void onPrepared(MediaPlayer mp) {
+                        public void onPrepared(final MediaPlayer mp) {
                             double videoWidth = mp.getVideoWidth();
                             double videoHeight = mp.getVideoHeight();
                             int displayWidth, displayHeight;
@@ -126,7 +134,27 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                             layout.height = displayHeight;
                             videoView.setLayoutParams(layout);
 
-                            videoView.start();
+//                            videoView.start();
+                            holder.frame.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ImageButton playButton = holder.playButton;
+                                    if (mp.isPlaying()) {
+                                        playButton.setVisibility(View.VISIBLE);
+                                        videoView.pause();
+                                    } else {
+                                        playButton.setVisibility(View.GONE);
+                                        videoView.start();
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            holder.playButton.setVisibility(View.VISIBLE);
                         }
                     });
                 }
