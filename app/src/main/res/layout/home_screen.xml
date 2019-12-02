@@ -68,8 +68,8 @@
 
     <Button
         android:id="@+id/Home_appliance_button"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/home_appliance_button_background"
@@ -84,8 +84,8 @@
 
     <Button
         android:id="@+id/Automotive"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/automotive_background"
@@ -100,8 +100,8 @@
 
     <Button
         android:id="@+id/Home_Repairs"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/home_repairs_background"
@@ -121,8 +121,8 @@
 
     <Button
         android:id="@+id/Office_electronics"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/office_electronics_background"
