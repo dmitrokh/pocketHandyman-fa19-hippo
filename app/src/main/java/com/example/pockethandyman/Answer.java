@@ -1,7 +1,5 @@
 package com.example.pockethandyman;
 
-import android.net.Uri;
-
 import java.io.Serializable;
 
 public class Answer implements Serializable {
