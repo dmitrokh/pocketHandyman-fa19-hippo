@@ -42,7 +42,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     private TextView questionTextView;
-    private ImageButton recordVideoButton;
+    private Button recordVideoButton;
     private EditText answerField;
     private Button publishButton;
     private BottomNavigationView bottomNavigationView;
