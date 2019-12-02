@@ -84,8 +84,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             public void onClick(View view) {
                 if (holder.isUpvoted) {
                     answer.removeUpvote();
+                    view.setBackgroundTintList(context.getResources().getColorStateList(R.color.lightGray));
                 } else {
                     answer.addUpvote();
+                    view.setBackgroundTintList(context.getResources().getColorStateList(R.color.logoColor));
                 }
                 holder.isUpvoted = !holder.isUpvoted;
                 holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
@@ -100,6 +102,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         String videoFileName = answer.videoFileName;
         if (videoFileName == null || videoFileName.length() == 0) {
             holder.answerVideo.setVisibility(View.GONE);
+            holder.playButton.setVisibility(View.GONE);
             return;
         }
 

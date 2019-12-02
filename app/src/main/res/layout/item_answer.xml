@@ -9,14 +9,67 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/upvoteButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/arrow_lightgray"
+            android:backgroundTint="@color/lightGray"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePic2" />
+
+        <TextView
+            android:id="@+id/numUpvotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="8dp"
+            android:text="0"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:text="Upvotes"
+            android:textSize="14sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/profilePic2"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,46 +78,17 @@
 
         <TextView
             android:id="@+id/author"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="14dp"
             android:layout_marginEnd="16dp"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:lineSpacingExtra="18sp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
             android:text="John Doe"
-            android:textSize="18sp"
+            android:textSize="14sp"
             tools:text="John Doe" />
-
-
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/upvoteButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/custom_button"
-        android:backgroundTint="@color/logoColor"
-        android:text="UPVOTE"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/profilePic2"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/numUpvotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_weight="1"
-        android:text="0"
-        android:textSize="18sp" />
 
     <FrameLayout
         android:id="@+id/videoFrame"
@@ -75,7 +99,8 @@
             android:id="@+id/answerVideo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp" />
 
         <ImageButton
             android:id="@+id/playButton"
@@ -92,9 +117,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:lineSpacingExtra="3dp"
+        android:paddingTop="16dp"
         android:paddingBottom="8dp"
         android:text="This is some answer to a question"
         android:textColor="@color/colorPrimaryDark"
