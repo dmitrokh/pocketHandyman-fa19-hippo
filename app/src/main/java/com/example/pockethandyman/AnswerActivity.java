@@ -1,14 +1,21 @@
 package com.example.pockethandyman;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -26,6 +33,9 @@ import java.util.List;
  * Activity to view a question and its answers
  */
 public class AnswerActivity extends AppCompatActivity {
+
+    private String taskName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +55,59 @@ public class AnswerActivity extends AppCompatActivity {
 
         TextView questionTitle = findViewById(R.id.questionTitle);
         questionTitle.setText(question.getQuestion());
+        TextView author = findViewById(R.id.author);
+        author.setText(question.getAuthor());
+
+        taskName = question.getCategory();
 
         setupBottomNavigationView();
-        setActionBar(question);
     }
 
-    private void setActionBar(Question question) {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(question.getCategory());
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//    private void setActionBar(Question question) {
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setTitle(question.getCategory());
+//            getSupportActionBar().setHomeButtonEnabled(true);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        }
+//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_repairs_menu, menu);
+        if (taskName != null) {
+            setActionBarTitleAndColor(taskName);
+        }
+        return true;
+    }
+
+    private void setActionBarTitleAndColor(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            Spannable text = new SpannableString(actionBar.getTitle());
+            text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            actionBar.setTitle(text);
+
+            switch (title) {
+                case "Home Appliances":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.HomeAppliancesColor)));
+                    break;
+                case "Office Electronics":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.OfficeElectronicsColor)));
+                    break;
+                case "Automotive":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.AutomotiveColor)));
+                    break;
+                case "Home Repairs":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.HomeRepairsColor)));
+                    break;
+                default:
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
+                    break;
+            }
         }
     }
 
