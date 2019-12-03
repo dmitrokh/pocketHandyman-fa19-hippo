@@ -22,11 +22,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,6 +43,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     private List<Answer> answers;
     private Context context;
+    private Globals globalVars;
 
     public static class AnswerViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,6 +71,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     public AnswerAdapter(List<Answer> answers, Context context) {
         this.answers = answers;
         this.context = context;
+        this.globalVars = (Globals) context.getApplicationContext();
     }
 
     @Override
@@ -84,13 +90,36 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             public void onClick(View view) {
                 if (holder.isUpvoted) {
                     answer.removeUpvote();
-                    view.setBackgroundTintList(context.getResources().getColorStateList(R.color.lightGray));
                 } else {
                     answer.addUpvote();
-                    view.setBackgroundTintList(context.getResources().getColorStateList(R.color.logoColor));
                 }
                 holder.isUpvoted = !holder.isUpvoted;
                 holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
+
+                // save the updated answer into a question and save updated question into Firebase
+                HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
+                String questionText = answer.questionText;
+                Question question = allQuestions.get(questionText.hashCode());
+
+                List<Answer> allAnswersForQuestion = question.getAnswers();
+
+                //find and remove old answer
+                Iterator iter = allAnswersForQuestion.iterator();
+
+                while (iter.hasNext()) {
+                    Answer answerToCheck = (Answer)iter.next();
+
+                    if (answerToCheck.answerText.equals(answer.answerText)
+                            && answerToCheck.author.equals(answer.author)
+                            && answerToCheck.videoFileName.equals((answer.videoFileName))) {
+                        iter.remove();
+                    }
+                }
+
+                question.getAnswers().add(answer);
+
+                DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference("questions");
+                dbReference.child(String.valueOf(questionText.hashCode())).setValue(question);
             }
         });
 
