@@ -1,11 +1,16 @@
 package com.example.pockethandyman;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -64,9 +69,9 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         question = (Question) getIntent().getSerializableExtra("question");
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
 
         questionTextView = findViewById(R.id.questionField);
         recordVideoButton = findViewById(R.id.imageButton2);
@@ -117,7 +122,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         });
 
         setupBottomNavigationView();
-        setActionBar(question);
     }
 
 
@@ -214,11 +218,42 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     }
 
 
-    private void setActionBar(Question question) {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(question.getCategory());
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_repairs_menu, menu);
+        setActionBarTitleAndColor();
+        return true;
+    }
+
+    private void setActionBarTitleAndColor() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            String title = question.getCategory();
+            actionBar.setTitle(title);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            Spannable text = new SpannableString(actionBar.getTitle());
+            text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            actionBar.setTitle(text);
+
+            switch (title) {
+                case "Home Appliances":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.HomeAppliancesColor)));
+                    break;
+                case "Office Electronics":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.OfficeElectronicsColor)));
+                    break;
+                case "Automotive":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.AutomotiveColor)));
+                    break;
+                case "Home Repairs":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.HomeRepairsColor)));
+                    break;
+                default:
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
+                    break;
+            }
         }
     }
 
