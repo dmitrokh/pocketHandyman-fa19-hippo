@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Answer implements Serializable {
 
     public String answerText;
+    public String questionText;
     public String author;
     public String videoFileName;
     public int numUpvotes;
@@ -15,8 +16,9 @@ public class Answer implements Serializable {
 
     }
 
-    public Answer(String answerText, String author, String videoFileName) {
+    public Answer(String answerText, String questionText, String author, String videoFileName) {
         this.answerText = answerText;
+        this.questionText = questionText;
         this.author = author;
         this.videoFileName = videoFileName;
     }
