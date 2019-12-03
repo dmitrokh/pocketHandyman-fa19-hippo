@@ -52,7 +52,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     StorageReference storageRef;
     StorageReference videoRef;
     private ProgressBar pBar;
-    private String videoFileName;
+    private String videoFileName = "";
     private Uri videoUri;
 
     @Override
@@ -97,6 +97,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     Answer newAnswer = new Answer();
                     newAnswer.author = globalVars.getCurUser();
                     newAnswer.answerText = answerField.getText().toString();
+                    newAnswer.questionText = question.getQuestion();
 
                     newAnswer.videoFileName = videoFileName;
 
