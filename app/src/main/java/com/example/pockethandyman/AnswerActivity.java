@@ -45,6 +45,8 @@ public class AnswerActivity extends AppCompatActivity {
 
         TextView questionTitle = findViewById(R.id.questionTitle);
         questionTitle.setText(question.getQuestion());
+        TextView author = findViewById(R.id.author);
+        author.setText(question.getAuthor());
 
         setupBottomNavigationView();
         setActionBar(question);
