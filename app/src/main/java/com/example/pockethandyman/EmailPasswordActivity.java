@@ -30,6 +30,9 @@ public class EmailPasswordActivity extends AppCompatActivity implements
     public ProgressDialog mProgressDialog;
     private Globals globalVars;
 
+
+    static EmailPasswordActivity emailPasswordActivity;
+
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -57,6 +60,8 @@ public class EmailPasswordActivity extends AppCompatActivity implements
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+        emailPasswordActivity = this;
     }
 
     // [START on_start_check_user]
@@ -150,7 +155,7 @@ public class EmailPasswordActivity extends AppCompatActivity implements
         // [END sign_in_with_email]
     }
 
-    private void signOut() {
+    public void signOut() {
         mAuth.signOut();
         updateUI(null);
     }
@@ -261,6 +266,10 @@ public class EmailPasswordActivity extends AppCompatActivity implements
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+    }
+
+    public static EmailPasswordActivity getInstance(){
+        return emailPasswordActivity;
     }
 
 }

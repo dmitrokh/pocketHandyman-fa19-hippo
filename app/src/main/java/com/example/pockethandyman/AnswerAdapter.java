@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -41,12 +45,21 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         private TextView author;
         private TextView answerText;
         private VideoView answerVideo;
+        private TextView numUpvotes;
+        private Button upvote;
+        private FrameLayout frame;
+        private ImageButton playButton;
+        boolean isUpvoted = false;
 
         public AnswerViewHolder(View view) {
             super(view);
             author = view.findViewById(R.id.author);
             answerText = view.findViewById(R.id.answerText);
             answerVideo = view.findViewById(R.id.answerVideo);
+            numUpvotes = view.findViewById(R.id.numUpvotes);
+            upvote = view.findViewById(R.id.upvoteButton);
+            frame = view.findViewById(R.id.videoFrame);
+            playButton = view.findViewById(R.id.playButton);
         }
     }
 
@@ -63,12 +76,33 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     @Override
     public void onBindViewHolder(@NonNull final AnswerViewHolder holder, int position) {
-        Answer answer = answers.get(position);
+        final Answer answer = answers.get(position);
+
+
+        holder.upvote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.isUpvoted) {
+                    answer.removeUpvote();
+                    view.setBackgroundTintList(context.getResources().getColorStateList(R.color.lightGray));
+                } else {
+                    answer.addUpvote();
+                    view.setBackgroundTintList(context.getResources().getColorStateList(R.color.logoColor));
+                }
+                holder.isUpvoted = !holder.isUpvoted;
+                holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
+            }
+        });
+
         holder.author.setText(answer.author);
         holder.answerText.setText(answer.answerText);
+        holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
 
-        String videoFileName = answer.videoUriString;
+
+        String videoFileName = answer.videoFileName;
         if (videoFileName == null || videoFileName.length() == 0) {
+            holder.answerVideo.setVisibility(View.GONE);
+            holder.playButton.setVisibility(View.GONE);
             return;
         }
 
@@ -83,9 +117,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                     final VideoView videoView = holder.answerVideo;
                     videoView.setVideoPath(localFile.getAbsolutePath());
                     Log.e("adapter", "set file uri");
+
                     videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
-                        public void onPrepared(MediaPlayer mp) {
+                        public void onPrepared(final MediaPlayer mp) {
                             double videoWidth = mp.getVideoWidth();
                             double videoHeight = mp.getVideoHeight();
                             int displayWidth, displayHeight;
@@ -102,7 +137,27 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                             layout.height = displayHeight;
                             videoView.setLayoutParams(layout);
 
-                            videoView.start();
+//                            videoView.start();
+                            holder.frame.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ImageButton playButton = holder.playButton;
+                                    if (mp.isPlaying()) {
+                                        playButton.setVisibility(View.VISIBLE);
+                                        videoView.pause();
+                                    } else {
+                                        playButton.setVisibility(View.GONE);
+                                        videoView.start();
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            holder.playButton.setVisibility(View.VISIBLE);
                         }
                     });
                 }

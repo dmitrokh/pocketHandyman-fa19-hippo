@@ -5,4 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="bottomNavBarBackground">#EEEEEE</color>
     <color name="logoColor">#EFA413</color>
+    <color name="HomeAppliancesColor">#00968C</color>
+    <color name="OfficeElectronicsColor">#6978B9</color>
+    <color name="AutomotiveColor">#D495171E</color>
+    <color name="HomeRepairsColor">#F0CDA007</color>
+    <color name="lightGray">#DCDCDC</color>
 </resources>

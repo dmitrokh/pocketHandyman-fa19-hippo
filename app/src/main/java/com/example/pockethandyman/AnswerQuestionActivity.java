@@ -42,7 +42,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     private TextView questionTextView;
-    private ImageButton recordVideoButton;
+    private Button recordVideoButton;
     private EditText answerField;
     private Button publishButton;
     private BottomNavigationView bottomNavigationView;
@@ -97,12 +97,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     Answer newAnswer = new Answer();
                     newAnswer.author = globalVars.getCurUser();
                     newAnswer.answerText = answerField.getText().toString();
-                    // videoUri could be null?
-                    if (videoUri != null) {
-                        newAnswer.videoUriString = videoUri.toString();
-                    } else {
-                        newAnswer.videoUriString = "";
-                    }
+
+                    newAnswer.videoFileName = videoFileName;
 
                     HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
                     String questionText = question.getQuestion();
@@ -159,7 +155,19 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     }
 
 
+    // onOptionsItemSelected is used to go back to previous screen with list of unanswered questions
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return false;
+    }
+
+
     private void uploadData(Uri videoUri) {
+        //gs://pockethandyman-786ef.appspot.com/videos/dmitro.kh_20191127_114118
         if(videoUri != null){
             UploadTask uploadTask = videoRef.putFile(videoUri);
 
