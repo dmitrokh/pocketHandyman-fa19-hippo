@@ -29,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -72,6 +74,13 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         this.answers = answers;
         this.context = context;
         this.globalVars = (Globals) context.getApplicationContext();
+
+        Collections.sort(this.answers, new Comparator<Answer>() {
+            @Override
+            public int compare(Answer o1, Answer o2) {
+                return o2.numUpvotes - o1.numUpvotes;
+            }
+        });
     }
 
     @Override
@@ -90,8 +99,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             public void onClick(View view) {
                 if (holder.isUpvoted) {
                     answer.removeUpvote();
+                    holder.upvote.setBackground(context.getResources().getDrawable(R.drawable.arrow_lightgray, null));
                 } else {
                     answer.addUpvote();
+                    holder.upvote.setBackground(context.getResources().getDrawable(R.drawable.arrow_orange, null));
                 }
                 holder.isUpvoted = !holder.isUpvoted;
                 holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
