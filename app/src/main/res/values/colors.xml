@@ -9,5 +9,6 @@
     <color name="OfficeElectronicsColor">#6978B9</color>
     <color name="AutomotiveColor">#D495171E</color>
     <color name="HomeRepairsColor">#F0CDA007</color>
-    <color name="lightGray">#DCDCDC</color>
+    <color name="LightGray">#DCDCDC</color>
+    <color name="White">#FFFFFF</color>
 </resources>

@@ -1,40 +1,42 @@
 package com.example.pockethandyman;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
@@ -52,7 +54,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     StorageReference storageRef;
     StorageReference videoRef;
     private ProgressBar pBar;
-    private String videoFileName;
+    private String videoFileName = "";
     private Uri videoUri;
 
     @Override
@@ -64,9 +66,9 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         question = (Question) getIntent().getSerializableExtra("question");
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
 
         questionTextView = findViewById(R.id.questionField);
         recordVideoButton = findViewById(R.id.imageButton2);
@@ -97,6 +99,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     Answer newAnswer = new Answer();
                     newAnswer.author = globalVars.getCurUser();
                     newAnswer.answerText = answerField.getText().toString();
+                    newAnswer.questionText = question.getQuestion();
 
                     newAnswer.videoFileName = videoFileName;
 
@@ -116,7 +119,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         });
 
         setupBottomNavigationView();
-        setActionBar(question);
     }
 
 
@@ -213,18 +215,53 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     }
 
 
-    private void setActionBar(Question question) {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(question.getCategory());
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_repairs_menu, menu);
+        setActionBarTitleAndColor();
+        return true;
+    }
+
+    private void setActionBarTitleAndColor() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            String title = question.getCategory();
+            actionBar.setTitle(title);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            Spannable text = new SpannableString(actionBar.getTitle());
+            text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            actionBar.setTitle(text);
+
+            Drawable backArrow = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material);
+            backArrow.setColorFilter(getResources().getColor(R.color.White), PorterDuff.Mode.SRC_ATOP);
+            actionBar.setHomeAsUpIndicator(backArrow);
+
+            switch (title) {
+                case "Home Appliances":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.HomeAppliancesColor)));
+                    break;
+                case "Office Electronics":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.OfficeElectronicsColor)));
+                    break;
+                case "Automotive":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.AutomotiveColor)));
+                    break;
+                case "Home Repairs":
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.HomeRepairsColor)));
+                    break;
+                default:
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
+                    break;
+            }
         }
     }
 
 
     private void setupBottomNavigationView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_question);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

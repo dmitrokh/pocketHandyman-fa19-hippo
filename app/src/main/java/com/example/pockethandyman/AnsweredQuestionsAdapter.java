@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
 
     private List<Question> questions;
     private Context context;
-
+    private Globals globalVars;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -37,6 +38,7 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
     public AnsweredQuestionsAdapter(Context context, List<Question> questions) {
         this.context = context;
         this.questions = questions;
+        globalVars = (Globals) context.getApplicationContext();
     }
 
     @Override
@@ -54,7 +56,7 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Question question = questions.get(position);
         Log.e(this.getClass().getName(), question.getQuestion() + " " + question.getAuthor());
         holder.title.setText(question.getQuestion());
@@ -63,15 +65,36 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int p = position;
+                Question questionToSend = questions.get(position);
+                String category = questionToSend.getCategory();
+                String questionText = questionToSend.getQuestion();
+
+                questionToSend = getQuestionForTask(category, questionText);
+
                 Intent intent = new Intent(context, AnswerActivity.class);
-                intent.putExtra("question", question);
+                intent.putExtra("question", questionToSend);
                 context.startActivity(intent);
             }
         });
     }
 
-//    public void removeFrag(Question specificQuestion) {
-//        questions.remove(specificQuestion);
-//        notifyDataSetChanged();
-//    }
+    private Question getQuestionForTask(String taskName, String questionTitle) {
+        HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
+
+        Question toReturn = null;
+
+        for (int hashOfQuestion : allQuestions.keySet()) {
+            Question question = allQuestions.get(hashOfQuestion);
+
+            if (question.getCategory().equals(taskName)) {
+                if (question.getAnswers().size() != 0 && question.getQuestion().equals(questionTitle)) {
+                    toReturn = question;
+                    break;
+                }
+            }
+        }
+
+        return toReturn;
+    }
 }
