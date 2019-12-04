@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -35,6 +37,13 @@ public class ButtonActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Globals globalVars;
 
+    private EditText searchBoxEntry;
+    private String searchBoxEntryText;
+    private String[] textEntryArray;
+    private ArrayList<String> textEntryElements = new ArrayList<>();
+    private ViewPagerAdapter adapter;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +53,12 @@ public class ButtonActivity extends AppCompatActivity {
 
         taskName = getIntent().getStringExtra("ActivityName");
 
+        if (getIntent().hasExtra("UsersSearch")) {
+            textEntryElements = getIntent().getStringArrayListExtra("UsersSearch");
+        }
+
         viewPager = findViewById(R.id.viewPager);
-        setupViewPager(viewPager);
+        setupViewPager();
 
         tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);//setting tab over viewpager
@@ -82,32 +95,84 @@ public class ButtonActivity extends AppCompatActivity {
     private HashMap<String, List<Question>> getQuestionsForTask() {
         HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
 
-        ArrayList<Question> unansweredQuestions = new ArrayList<>();
-        ArrayList<Question> answeredQuestions = new ArrayList<>();
+        ArrayList<Question> unansweredQuestionsFull = new ArrayList<>();
+        ArrayList<Question> answeredQuestionsFull = new ArrayList<>();
+
+//        ArrayList<Question> unansweredQuestionsUserSearch = new ArrayList<>();
+//        ArrayList<Question> answeredQuestionsUserSearch = new ArrayList<>();
 
         for (int hashOfQuestion : allQuestions.keySet()) {
             Question question = allQuestions.get(hashOfQuestion);
 
             if (question.getCategory().equals(taskName)) {
-                if (question.getAnswers().size() == 0) {
-                    unansweredQuestions.add(question);
+                if (textEntryElements.isEmpty()) {
+                    if (question.getAnswers().size() == 0) {
+                        unansweredQuestionsFull.add(question);
+                    } else {
+                        answeredQuestionsFull.add(question);
+                    }
+
                 } else {
-                    answeredQuestions.add(question);
+                    String tempString = "/0" + question.getQuestion() + "/0";
+                    for (String elem : textEntryElements) {
+                        if (tempString.contains(elem)) {
+                            if (question.getAnswers().size() == 0) {
+                                if (!unansweredQuestionsFull.contains(question)) {
+                                    unansweredQuestionsFull.add(question);
+                                }
+                            } else {
+                                if (!answeredQuestionsFull.contains(question)) {
+                                    answeredQuestionsFull.add(question);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
         HashMap<String, List<Question>> questions = new HashMap<>();
-        questions.put("answered", answeredQuestions);
-        questions.put("unanswered", unansweredQuestions);
+        questions.put("answered", answeredQuestionsFull);
+        questions.put("unanswered", unansweredQuestionsFull);
+
+//        questions.put("answeredUserSearch", answeredQuestionsUserSearch);
+//        questions.put("unansweredUserSearch", unansweredQuestionsUserSearch);
+
 
         return questions;
     }
 
+//    private HashMap<String, List<Question>> getQuestionsForTaskUserSearch() {
+//        HashMap<Integer, Question> allQuestions = globalVars.getAllQuestions();
+//
+//        ArrayList<Question> unansweredQuestions = new ArrayList<>();
+//        ArrayList<Question> answeredQuestions = new ArrayList<>();
+//
+//        for (int hashOfQuestion : allQuestions.keySet()) {
+//            Question question = allQuestions.get(hashOfQuestion);
+//
+//            for (String elem: textEntryElements) {
+//                if (question.getQuestion().contains(elem)) {
+//                    if (question.getAnswers().size() == 0) {
+//                        unansweredQuestions.add(question);
+//                    } else {
+//                        answeredQuestions.add(question);
+//                    }
+//                }
+//            }
+//        }
+//
+//        HashMap<String, List<Question>> questions = new HashMap<>();
+//        questions.put("answered", answeredQuestions);
+//        questions.put("unanswered", unansweredQuestions);
+//
+//        return questions;
+//    }
+
 
     //Setting View Pager
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+    private void setupViewPager() {
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         Map<String, List<Question>> questions = getQuestionsForTask();
 
@@ -115,13 +180,33 @@ public class ButtonActivity extends AppCompatActivity {
                 questions.get("answered")), "Answered");
         adapter.addFrag(new UnansweredQuestionsFragment("Unanswered questions", taskName,
                 questions.get("unanswered")), "Unanswered");
+
         viewPager.setAdapter(adapter);
     }
 
+//    //Setting View Pager
+//    private void setupViewPagerAfterUserSearch() {
+//        adapter.removeAllFragments();
+//        //adapter = new ViewPagerAdapter(getSupportFragmentManager());
+//
+//        Map<String, List<Question>> questions = getQuestionsForTask();
+//
+//        System.out.println(questions.get("answeredUserSearch"));
+//
+//        adapter.addFrag(new AnsweredQuestionsFragment("Answered questions", taskName,
+//                questions.get("answeredUserSearch")), "Answered");
+//        adapter.addFrag(new UnansweredQuestionsFragment("Unanswered questions", taskName,
+//                questions.get("unansweredUserSearch")), "Unanswered");
+//        //adapter.notifyDataSetChanged();
+//        //viewPager.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//
+//    }
+
     //View Pager fragments setting adapter class
     private class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();//fragment arraylist
-        private final List<String> mFragmentTitleList = new ArrayList<>();//title arraylist
+        private List<Fragment> mFragmentList = new ArrayList<>();//fragment arraylist
+        private List<String> mFragmentTitleList = new ArrayList<>();//title arraylist
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -148,6 +233,14 @@ public class ButtonActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+
+
+//        public void removeAllFragments () {
+//            mFragmentTitleList = new ArrayList<>();
+//            mFragmentList = new ArrayList<>();
+//            notifyDataSetChanged();
+//        }
+
     }
 
 
@@ -222,5 +315,50 @@ public class ButtonActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_ENTER:
+                searchBoxEntry = (EditText) findViewById(R.id.editText2);
+                searchBoxEntryText = searchBoxEntry.getText().toString();
+                textEntryArray = searchBoxEntryText.split(" ");
+                textEntryElements = new ArrayList<>();
+
+                for (String elem: textEntryArray) {
+                    if (elem.toLowerCase().equals("how") || elem.toLowerCase().equals("the") || elem.toLowerCase().equals("a") ||
+                            elem.toLowerCase().equals("to") || elem.toLowerCase().equals("fix") || elem.toLowerCase().equals("repair") ||
+                            elem.toLowerCase().equals("replace")) {
+
+                        // Do nothing because we do not want to count these words
+                        //Could add more but this is a start
+                    } else {
+                        textEntryElements.add(" " + elem + " ");
+                        textEntryElements.add(" " + elem + "/0");
+                        textEntryElements.add("/0" + elem + " ");
+                        textEntryElements.add(elem + ".");
+                        textEntryElements.add(elem + "?");
+                        textEntryElements.add(elem + "!");
+                    }
+                }
+
+                //System.out.println(textEntryElements);
+               //setupViewPagerAfterUserSearch();
+
+                Intent intent = new Intent(this, ButtonActivity.class);
+                intent.putExtra("UsersSearch", textEntryElements);
+                intent.putExtra("ActivityName", taskName);
+                startActivity(intent);
+
+
+
+                return true;
+
+
+            default:
+                return super.onKeyUp(keyCode, event);
+        }
     }
 }

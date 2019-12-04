@@ -6,33 +6,33 @@
     android:focusableInTouchMode="true"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/edittext_background"
-        android:hint="    Search for a question..."
-        android:singleLine="true"
-        android:textCursorDrawable="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:textColor="#807E7E"/>
+<!--    <EditText-->
+<!--        android:id="@+id/editText2"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:background="@drawable/edittext_background"-->
+<!--        android:hint="    Search for a question..."-->
+<!--        android:singleLine="true"-->
+<!--        android:textCursorDrawable="@color/colorPrimary"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:textColor="#807E7E"/>-->
 
 
-    <ImageView
-        android:id="@+id/magnifying_glass"
-        android:layout_width="31dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText2"
-        app:layout_constraintEnd_toEndOf="@+id/editText2"
-        app:layout_constraintTop_toTopOf="@+id/editText2"
-        app:srcCompat="@drawable/magnifying_glass_2" />
+<!--    <ImageView-->
+<!--        android:id="@+id/magnifying_glass"-->
+<!--        android:layout_width="31dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/editText2"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/editText2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/editText2"-->
+<!--        app:srcCompat="@drawable/magnifying_glass_2" />-->
 
 
     <com.google.android.material.tabs.TabLayout

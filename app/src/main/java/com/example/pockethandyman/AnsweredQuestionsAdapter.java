@@ -69,4 +69,9 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
             }
         });
     }
+
+//    public void removeFrag(Question specificQuestion) {
+//        questions.remove(specificQuestion);
+//        notifyDataSetChanged();
+//    }
 }

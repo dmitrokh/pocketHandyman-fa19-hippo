@@ -2,9 +2,11 @@ package com.example.pockethandyman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,10 @@ public class HomeActivity extends AppCompatActivity {
     private Globals globalVars;
     private DatabaseReference dbRef;
     private HashMap<Integer, Question> allQuestions = new HashMap<>();
+    private EditText searchBoxEntry;
+    private String searchBoxEntryText;
+    private String[] textEntryArray;
+    private ArrayList<String> textEntryElements;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +129,45 @@ public class HomeActivity extends AppCompatActivity {
 
         setupBottomNavigationView();
 
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_ENTER:
+                searchBoxEntry = (EditText) findViewById(R.id.editText);
+                searchBoxEntryText = searchBoxEntry.getText().toString();
+                textEntryArray = searchBoxEntryText.split(" ");
+                textEntryElements = new ArrayList<>();
+                for (String elem: textEntryArray) {
+                    if (elem.toLowerCase().equals("how") || elem.toLowerCase().equals("the") || elem.toLowerCase().equals("a") ||
+                            elem.toLowerCase().equals("to") || elem.toLowerCase().equals("fix") || elem.toLowerCase().equals("repair") ||
+                            elem.toLowerCase().equals("replace")) {
+
+                        // Do nothing because we do not want to count these words
+                        //Could add more but this is a start
+                    } else {
+                        textEntryElements.add(" " + elem + " ");
+                        textEntryElements.add(" " + elem + "/0");
+                        textEntryElements.add("/0" + elem + " ");
+                        textEntryElements.add(elem + ".");
+                        textEntryElements.add(elem + "?");
+                        textEntryElements.add(elem + "!");
+
+                    }
+                }
+
+                Intent intent = new Intent(this, UserSearchActivity.class);
+                intent.putExtra("UsersSearch", textEntryElements);
+                startActivity(intent);
+
+                //System.out.println(textEntryElements);
+                return true;
+
+
+            default:
+                return super.onKeyUp(keyCode, event);
+        }
     }
 
 

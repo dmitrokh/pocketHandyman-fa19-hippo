@@ -72,4 +72,9 @@ public class UnansweredQuestionsAdapter extends RecyclerView.Adapter<UnansweredQ
             }
         });
     }
+
+//    public void removeFrag(Question specificQuestion) {
+//        questions.remove(specificQuestion);
+//        notifyDataSetChanged();
+//    }
 }
