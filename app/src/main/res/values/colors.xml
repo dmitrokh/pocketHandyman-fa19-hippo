@@ -10,4 +10,5 @@
     <color name="AutomotiveColor">#D495171E</color>
     <color name="HomeRepairsColor">#F0CDA007</color>
     <color name="LightGray">#DCDCDC</color>
+    <color name="White">#FFFFFF</color>
 </resources>
