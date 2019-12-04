@@ -42,7 +42,10 @@
     <FrameLayout
         android:id="@+id/videoFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/author">
 
         <VideoView
             android:id="@+id/answerVideo"
