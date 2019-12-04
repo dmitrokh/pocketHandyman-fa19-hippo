@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,11 +27,13 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView author;
+        public Button answerButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.title = itemView.findViewById(R.id.questionTitle);
             this.author = itemView.findViewById(R.id.author);
+            this.answerButton = itemView.findViewById(R.id.answerAnsweredButton);
         }
     }
 
@@ -61,6 +64,15 @@ public class AnsweredQuestionsAdapter extends RecyclerView.Adapter<AnsweredQuest
         Log.e(this.getClass().getName(), question.getQuestion() + " " + question.getAuthor());
         holder.title.setText(question.getQuestion());
         holder.author.setText(question.getAuthor());
+
+        holder.answerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AnswerQuestionActivity.class);
+                intent.putExtra("question", question);
+                context.startActivity(intent);
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
