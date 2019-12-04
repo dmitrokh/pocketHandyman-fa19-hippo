@@ -40,8 +40,8 @@ import java.util.List;
  */
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
 
-    private final int MAX_VIDEO_HEIGHT = 600;
-    private final int MAX_VIDEO_WIDTH = 600;
+    private final int MAX_VIDEO_HEIGHT = 1200;
+    private final int MAX_VIDEO_WIDTH = 1400;
 
     private List<Answer> answers;
     private Context context;
@@ -134,7 +134,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             }
         });
 
-        holder.author.setText(answer.author);
+        holder.author.setText(answer.author + " answered this");
         holder.answerText.setText(answer.answerText);
         holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
 
