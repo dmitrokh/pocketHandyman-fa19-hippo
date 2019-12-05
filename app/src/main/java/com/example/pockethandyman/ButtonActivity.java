@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -49,6 +51,7 @@ public class ButtonActivity extends AppCompatActivity {
     private String[] textEntryArray;
     private ArrayList<String> textEntryElements = new ArrayList<>();
     private ViewPagerAdapter adapter;
+    private ImageView magnifying_glass;
 
 
     @Override
@@ -95,6 +98,15 @@ public class ButtonActivity extends AppCompatActivity {
         });
 
         setupBottomNavigationView();
+
+
+
+        magnifying_glass = (ImageView) findViewById(R.id.magnifying_glass);
+        magnifying_glass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
     }
 
 

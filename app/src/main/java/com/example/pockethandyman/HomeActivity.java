@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     private String searchBoxEntryText;
     private String[] textEntryArray;
     private ArrayList<String> textEntryElements;
+    private ImageView magnifying_glass;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,40 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home_screen);
 
         globalVars = (Globals) getApplicationContext();
+
+        magnifying_glass = (ImageView) findViewById(R.id.magnifying_glass);
+        magnifying_glass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchBoxEntry = (EditText) findViewById(R.id.editText);
+                searchBoxEntryText = searchBoxEntry.getText().toString();
+                textEntryArray = searchBoxEntryText.split(" ");
+                textEntryElements = new ArrayList<>();
+                for (String elem: textEntryArray) {
+                    if (elem.toLowerCase().equals("how") || elem.toLowerCase().equals("the") || elem.toLowerCase().equals("a") ||
+                            elem.toLowerCase().equals("to") || elem.toLowerCase().equals("fix") || elem.toLowerCase().equals("repair") ||
+                            elem.toLowerCase().equals("replace")) {
+
+                        // Do nothing because we do not want to count these words
+                        //Could add more but this is a start
+                    } else {
+                        textEntryElements.add(" " + elem + " ");
+                        textEntryElements.add(" " + elem + "/0");
+                        textEntryElements.add("/0" + elem + " ");
+                        textEntryElements.add(elem + ".");
+                        textEntryElements.add(elem + "?");
+                        textEntryElements.add(elem + "!");
+
+                    }
+                }
+
+                Intent intent = new Intent(view.getContext(), UserSearchActivity.class);
+                intent.putExtra("UsersSearch", textEntryElements);
+                startActivity(intent);
+            }
+        });
+
+
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("questions");
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -129,6 +165,9 @@ public class HomeActivity extends AppCompatActivity {
 
         setupBottomNavigationView();
 
+
+
+
     }
 
     @Override
@@ -190,6 +229,8 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         startActivity(intent);
+
+
     }
 
 
