@@ -1,6 +1,7 @@
 package com.example.pockethandyman;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -32,8 +33,10 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Adapter to handle answers in the RecyclerView under a question
@@ -46,6 +49,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     private List<Answer> answers;
     private Context context;
     private Globals globalVars;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     public static class AnswerViewHolder extends RecyclerView.ViewHolder {
 
@@ -56,7 +61,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         private Button upvote;
         private FrameLayout frame;
         private ImageButton playButton;
-        boolean isUpvoted = false;
 
         public AnswerViewHolder(View view) {
             super(view);
@@ -74,6 +78,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         this.answers = answers;
         this.context = context;
         this.globalVars = (Globals) context.getApplicationContext();
+        this.pref = context.getSharedPreferences("upvotes", Context.MODE_PRIVATE);
+        this.editor = this.pref.edit();
 
         Collections.sort(this.answers, new Comparator<Answer>() {
             @Override
@@ -90,21 +96,32 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AnswerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final AnswerViewHolder holder, final int position) {
         final Answer answer = answers.get(position);
 
 
         holder.upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.isUpvoted) {
+                Set<String> upvotedAnswers = pref.getStringSet(answer.questionText, new HashSet<String>());
+                upvotedAnswers = new HashSet<>(upvotedAnswers);
+                String positionStr = Integer.toString(position);
+
+                if (upvotedAnswers.contains(positionStr)) {
                     answer.removeUpvote();
                     holder.upvote.setBackground(context.getResources().getDrawable(R.drawable.arrow_lightgray, null));
+
+                    upvotedAnswers.remove(positionStr);
+                    editor.putStringSet(answer.questionText, upvotedAnswers);
+                    editor.commit();
                 } else {
                     answer.addUpvote();
                     holder.upvote.setBackground(context.getResources().getDrawable(R.drawable.arrow_orange, null));
+
+                    upvotedAnswers.add(positionStr);
+                    editor.putStringSet(answer.questionText, upvotedAnswers);
+                    editor.commit();
                 }
-                holder.isUpvoted = !holder.isUpvoted;
                 holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
 
                 // save the updated answer into a question and save updated question into Firebase
@@ -138,6 +155,11 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         holder.answerText.setText(answer.answerText);
         holder.numUpvotes.setText(Integer.toString(answer.numUpvotes));
 
+        Set<String> upvotedAnswers = pref.getStringSet(answer.questionText, new HashSet<String>());
+        String positionStr = Integer.toString(position);
+        if (upvotedAnswers.contains(positionStr)) {
+            holder.upvote.setBackground(context.getResources().getDrawable(R.drawable.arrow_orange, null));
+        }
 
         String videoFileName = answer.videoFileName;
         if (videoFileName == null || videoFileName.length() == 0) {
@@ -177,7 +199,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                             layout.height = displayHeight;
                             videoView.setLayoutParams(layout);
 
-//                            videoView.start();
                             holder.frame.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
