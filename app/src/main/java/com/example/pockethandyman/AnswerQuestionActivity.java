@@ -91,7 +91,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(answerField.getText().toString())){
+                if (TextUtils.isEmpty(answerField.getText().toString())
+                        || answerField.getText().toString().trim().isEmpty()){
                     Toast.makeText(
                             AnswerQuestionActivity.this, "Enter your answer!",
                             Toast.LENGTH_SHORT).show();
