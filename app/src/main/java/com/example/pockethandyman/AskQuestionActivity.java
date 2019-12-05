@@ -103,10 +103,13 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
                     return;
                 }
 
-                if (TextUtils.isEmpty(questionField.getText().toString())){
+                if (TextUtils.isEmpty(questionField.getText().toString())
+                        || questionField.getText().toString().trim().isEmpty()){
                     Toast.makeText(
-                            AskQuestionActivity.this, "Enter your questionField or go back!",
-                    Toast.LENGTH_SHORT).show();
+                            AskQuestionActivity.this, "Enter your question!",
+                            Toast.LENGTH_SHORT).show();
+
+                    return;
                 } else {
                     String question = questionField.getText().toString();
                     int hash = question.hashCode();
@@ -124,13 +127,16 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
 
                     dbReference = FirebaseDatabase.getInstance().getReference("questions");
                     dbReference.child(String.valueOf(hash)).setValue(toAsk);
+
+                    Toast.makeText(AskQuestionActivity.this, "Question published!",
+                            Toast.LENGTH_LONG).show();
                 }
 
                 Intent intent = new Intent(AskQuestionActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
-        
+
         setupBottomNavigationView();
 
 
