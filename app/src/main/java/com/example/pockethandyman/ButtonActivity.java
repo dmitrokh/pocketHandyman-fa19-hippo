@@ -105,8 +105,37 @@ public class ButtonActivity extends AppCompatActivity {
         magnifying_glass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                searchBoxEntry = (EditText) findViewById(R.id.editText2);
+                searchBoxEntryText = searchBoxEntry.getText().toString();
+                textEntryArray = searchBoxEntryText.split(" ");
+                textEntryElements = new ArrayList<>();
 
+                for (String elem: textEntryArray) {
+                    if (elem.toLowerCase().equals("how") || elem.toLowerCase().equals("the") || elem.toLowerCase().equals("a") ||
+                            elem.toLowerCase().equals("to") || elem.toLowerCase().equals("fix") || elem.toLowerCase().equals("repair") ||
+                            elem.toLowerCase().equals("replace")) {
+
+                        // Do nothing because we do not want to count these words
+                        //Could add more but this is a start
+                    } else {
+                        textEntryElements.add(" " + elem + " ");
+                        textEntryElements.add(" " + elem + "/0");
+                        textEntryElements.add("/0" + elem + " ");
+                        textEntryElements.add(elem + ".");
+                        textEntryElements.add(elem + "?");
+                        textEntryElements.add(elem + "!");
+                    }
+                }
+
+                //System.out.println(textEntryElements);
+                //setupViewPagerAfterUserSearch();
+
+                Intent intent = new Intent(view.getContext(), ButtonActivity.class);
+                intent.putExtra("UsersSearch", textEntryElements);
+                intent.putExtra("ActivityName", taskName);
+                startActivity(intent);
             }
+        });
     }
 
 
