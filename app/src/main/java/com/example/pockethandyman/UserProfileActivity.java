@@ -22,48 +22,61 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class UserProfileActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private EditText screenNameText;
     private String screenName;
     private TextView welcome;
+    private TextView questionsAskedByUser;
+    private TextView questionsAnsweredByUser;
     private Button signOutButton;
+    private Globals globalVars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        globalVars = (Globals) getApplicationContext();
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.logoColor)));
 
-        screenNameText = (EditText) findViewById(R.id.nameEditText);
+        //screenNameText = (EditText) findViewById(R.id.nameEditText);
         welcome = (TextView) findViewById(R.id.welcome);
+        questionsAskedByUser = (TextView) findViewById(R.id.contributions_text1);
+        questionsAnsweredByUser = (TextView) findViewById(R.id.contributions_text2);
         signOutButton = (Button) findViewById(R.id.signOutButton);
 
+        int[] contributions = getUsersContributions();
+        questionsAskedByUser.setText(Integer.toString(contributions[0]) + " Questions Asked");
+        questionsAnsweredByUser.setText(Integer.toString(contributions[1]) + " Questions Answered");
 
-        screenNameText.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {}
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                screenName = s.toString();
-                if (s.length() > 0) {
-                    welcome.setText("Welcome, " + screenName + "!");
-                    welcome.setVisibility(View.VISIBLE);
-                } else {
-                    welcome.setText("");
-                    welcome.setVisibility(View.INVISIBLE);
-                }
-
-        }});
+//        screenNameText.addTextChangedListener(new TextWatcher() {
+//
+//            public void afterTextChanged(Editable s) {}
+//
+//            public void beforeTextChanged(CharSequence s, int start,
+//                                          int count, int after) {
+//            }
+//
+//            public void onTextChanged(CharSequence s, int start,
+//                                      int before, int count) {
+//                screenName = s.toString();
+//                if (s.length() > 0) {
+//                    welcome.setText("Welcome, " + screenName + "!");
+//                    welcome.setVisibility(View.VISIBLE);
+//                } else {
+//                    welcome.setText("");
+//                    welcome.setVisibility(View.INVISIBLE);
+//                }
+//
+//            }});
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,4 +118,36 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
+    private int[] getUsersContributions() {
+        String curUser = globalVars.getCurUser();
+        // array to store the user's contributions: first value - questions asked, second - questions answered
+        int[] contributions = new int[2];
+
+        //if user is null, return empty array
+        if (curUser == null) {
+            return contributions;
+        }
+
+        HashMap<Integer, Question> allQuestiions = globalVars.getAllQuestions();
+
+        if (allQuestiions != null && !allQuestiions.isEmpty()) {
+            for (Integer hashOfQuestion : allQuestiions.keySet()) {
+                Question question = allQuestiions.get(hashOfQuestion);
+
+                if (question.getAuthor() != null && question.getAuthor().equals(curUser)) {
+                    contributions[0]++;
+                }
+
+                List<Answer> answers = question.getAnswers();
+
+                for (Answer answer : answers) {
+                    if (answer.author != null && answer.author.equals(curUser)) {
+                        contributions[1]++;
+                    }
+                }
+            }
+        }
+
+        return contributions;
+    }
 }
