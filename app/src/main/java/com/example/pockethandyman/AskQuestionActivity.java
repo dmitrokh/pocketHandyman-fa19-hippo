@@ -124,6 +124,9 @@ public class AskQuestionActivity extends AppCompatActivity implements AdapterVie
 
                     dbReference = FirebaseDatabase.getInstance().getReference("questions");
                     dbReference.child(String.valueOf(hash)).setValue(toAsk);
+
+                    Toast.makeText(AskQuestionActivity.this, "Question published!",
+                            Toast.LENGTH_LONG).show();
                 }
 
                 Intent intent = new Intent(AskQuestionActivity.this, HomeActivity.class);
